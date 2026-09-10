@@ -124,3 +124,38 @@ export function MosquitoBatIcon({ size = 28, color = 'currentColor', className =
     </svg>
   );
 }
+
+// Icon 5: Ant Icon
+export function AntIcon({ size = 18, color = 'currentColor', className = '' }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Head */}
+      <circle cx="12" cy="6" r="2" fill={color} />
+      {/* Thorax */}
+      <ellipse cx="12" cy="11" rx="1.5" ry="2" fill={color} />
+      {/* Abdomen */}
+      <ellipse cx="12" cy="18" rx="2.5" ry="3.5" fill={color} />
+      {/* Antennae */}
+      <path d="M10.5 5L8.5 3" />
+      <path d="M13.5 5L15.5 3" />
+      {/* Legs Left */}
+      <path d="M10.5 10L7 9" />
+      <path d="M10.5 11.5L6.5 12" />
+      <path d="M10.5 13L7 15" />
+      {/* Legs Right */}
+      <path d="M13.5 10L17 9" />
+      <path d="M13.5 11.5L17.5 12" />
+      <path d="M13.5 13L17 15" />
+    </svg>
+  );
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Bug } from 'lucide-react';
+import { AntIcon } from './CustomIcons';
 
 export default function GarudaRekhaBanner({ onEnquire }) {
   return (
@@ -75,12 +76,8 @@ export default function GarudaRekhaBanner({ onEnquire }) {
                 <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Kills Cockroaches</span>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#2B2B2B', padding: '0.55rem 1rem', borderRadius: '3px' }}>
-                <Bug size={18} color="var(--golden-yellow)" />
+                <AntIcon size={18} color="var(--golden-yellow)" />
                 <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Kills Ants</span>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#2B2B2B', padding: '0.55rem 1rem', borderRadius: '3px' }}>
-                <Bug size={18} color="var(--golden-yellow)" />
-                <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Kills Bedbugs</span>
               </motion.div>
             </div>
 
