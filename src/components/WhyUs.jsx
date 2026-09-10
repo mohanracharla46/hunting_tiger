@@ -64,9 +64,10 @@ export default function WhyUs() {
         </motion.div>
 
         <div
+          className="whyus-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '2rem',
           }}
         >
@@ -162,6 +163,12 @@ export default function WhyUs() {
           })}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .whyus-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

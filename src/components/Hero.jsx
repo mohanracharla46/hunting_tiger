@@ -237,12 +237,13 @@ export default function Hero({ onOpenEnquiry }) {
         @media (max-width: 992px) {
           .hero-grid { grid-template-columns: 1fr !important; text-align: center; justify-items: center; }
           .hero-grid p { margin-left: auto; margin-right: auto; }
-          .hero-grid div:first-child { display: flex; flex-direction: column; align-items: center; }
+          .hero-grid div:first-child { display: flex; flex-direction: column; align-items: center; width: 100%; }
         }
         @media (max-width: 600px) {
-          .hero-btn-group { width: 100%; flex-direction: column; }
-          .hero-btn-group a { width: 100%; justify-content: center; }
+          .hero-btn-group { width: 100%; flex-direction: column; gap: 0.75rem !important; }
+          .hero-btn-group a { width: 100% !important; justify-content: center !important; padding: 0.85rem 1rem !important; font-size: 1rem !important; box-sizing: border-box !important; }
           .hero-trust-strip { justify-content: center; width: 100%; }
+          .hero-trust-strip > div { width: 100%; justify-content: center; box-sizing: border-box; }
         }
       `}</style>
     </section>
