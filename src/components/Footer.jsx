@@ -159,7 +159,7 @@ export default function Footer() {
           }}
         >
           <div>
-            © {new Date().getFullYear()} <strong>HUNTING TIGER</strong>. Marketed exclusively by <strong>KSM AND CO., Vijayawada</strong>. All rights reserved.
+            © {new Date().getFullYear()} <strong>HUNTING TIGER</strong>. Marketed exclusively by <strong>KSM AND CO., Vijayawada</strong>. Designed & Developed by <strong>Nkxus Pvt.ltd</strong>.
           </div>
           <div>
             ISO 9001:2015 Certified FMCG Household Brand
