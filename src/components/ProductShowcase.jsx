@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Zap, Clock, Leaf, ShoppingBag, Check } from 'lucide-react';
+import { ShoppingBag, Check } from 'lucide-react';
+import { IncenseIcon, MosquitoBatIcon, CoilIcon, CockroachChalkIcon } from './CustomIcons';
 
 export default function ProductShowcase({ onSelectProduct }) {
-  const [activeCategory, setActiveCategory] = useState('bats');
+  const [activeCategory, setActiveCategory] = useState('incense');
 
   const categories = [
-    { id: 'bats', label: 'Mosquito Bats & Rackets', icon: Zap },
-    { id: 'coils', label: '12-Hr Mosquito Coils', icon: Clock },
-    { id: 'incense', label: 'Herbal Incense Sticks', icon: Leaf },
-    { id: 'chalk', label: 'Garuda Rekha Roach Chalk', icon: ShieldCheck },
+    { id: 'incense', label: 'Anti Mosquito Agarbatti', icon: IncenseIcon },
+    { id: 'bats', label: 'Mosquito Bats & Racquets', icon: MosquitoBatIcon },
+    { id: 'coils', label: 'Mosquito Coils', icon: CoilIcon },
+    { id: 'chalk', label: '3-in-1 Cockroach Chalk', icon: CockroachChalkIcon },
   ];
 
   const productsData = {
@@ -150,6 +151,7 @@ export default function ProductShowcase({ onSelectProduct }) {
 
         {/* Category Switcher Bar */}
         <div
+          className="category-switcher-bar"
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -167,6 +169,7 @@ export default function ProductShowcase({ onSelectProduct }) {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => setActiveCategory(cat.id)}
+                className="category-tab-btn"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -186,7 +189,7 @@ export default function ProductShowcase({ onSelectProduct }) {
                   transition: 'all 0.15s ease',
                 }}
               >
-                <Icon size={18} color={isActive ? 'var(--white)' : 'var(--tiger-red)'} />
+                <Icon size={24} color={isActive ? 'var(--white)' : 'var(--tiger-red)'} />
                 {cat.label}
               </motion.button>
             );
@@ -203,7 +206,7 @@ export default function ProductShowcase({ onSelectProduct }) {
             transition={{ duration: 0.25 }}
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
               gap: '2rem',
             }}
           >
@@ -325,6 +328,13 @@ export default function ProductShowcase({ onSelectProduct }) {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .category-switcher-bar { width: 100%; gap: 0.5rem !important; }
+          .category-tab-btn { width: 100%; justify-content: center; padding: 0.65rem 1rem !important; font-size: 0.95rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

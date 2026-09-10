@@ -2,6 +2,69 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2, Building2 } from 'lucide-react';
 
+const AP_DISTRICTS = [
+  'Alluri Sitharama Raju',
+  'Anakapalli',
+  'Ananthapuramu',
+  'Annamayya',
+  'Bapatla',
+  'Chittoor',
+  'East Godavari',
+  'Eluru',
+  'Guntur',
+  'Kakinada',
+  'Konaseema (Dr. B.R. Ambedkar Konaseema)',
+  'NTR (Vijayawada)',
+  'Nandyal',
+  'Palnadu',
+  'Parvathipuram Manyam',
+  'Prakasam',
+  'Sri Potti Sriramulu Nellore',
+  'Sri Sathya Sai',
+  'Srikakulam',
+  'Tirupati',
+  'Visakhapatnam',
+  'Vizianagaram',
+  'West Godavari',
+  'YSR Kadapa',
+];
+
+const TELANGANA_DISTRICTS = [
+  'Adilabad',
+  'Bhadradri Kothagudem',
+  'Hanumakonda',
+  'Hyderabad',
+  'Jagtial',
+  'Jangaon',
+  'Jayashankar Bhupalpally',
+  'Jogulamba Gadwal',
+  'Kamareddy',
+  'Karimnagar',
+  'Khammam',
+  'Kumuram Bheem Asifabad',
+  'Mahabubabad',
+  'Mahabubnagar',
+  'Mancherial',
+  'Medak',
+  'Medchal-Malkajgiri',
+  'Mulugu',
+  'Nagarkurnool',
+  'Nalgonda',
+  'Narayanpet',
+  'Nirmal',
+  'Nizamabad',
+  'Peddapalli',
+  'Rajanna Sircilla',
+  'Ranga Reddy',
+  'Sangareddy',
+  'Siddipet',
+  'Suryapet',
+  'Vikarabad',
+  'Wanaparthy',
+  'Warangal',
+  'Yadadri Bhuvanagiri',
+];
+
 export default function DistributorModal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -9,10 +72,19 @@ export default function DistributorModal({ isOpen, onClose }) {
     contactPerson: '',
     phone: '',
     email: '',
-    cityState: '',
-    experienceYears: '',
+    state: '',
+    city: '',
     categoryInterest: 'All Product Lines',
   });
+
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      state: selectedState,
+      city: '',
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +127,7 @@ export default function DistributorModal({ isOpen, onClose }) {
                 </p>
 
                 <form onSubmit={handleSubmit}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div className="modal-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <div className="form-group">
                       <label className="form-label">Business / Firm Name *</label>
                       <input
@@ -80,28 +152,77 @@ export default function DistributorModal({ isOpen, onClose }) {
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div className="form-group">
+                    <label className="form-label">Phone Number *</label>
+                    <input
+                      type="tel"
+                      required
+                      className="form-control"
+                      placeholder="10-digit Mobile"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="modal-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <div className="form-group">
-                      <label className="form-label">Phone Number *</label>
-                      <input
-                        type="tel"
+                      <label className="form-label">State *</label>
+                      <select
                         required
                         className="form-control"
-                        placeholder="10-digit Mobile"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      />
+                        value={formData.state}
+                        onChange={handleStateChange}
+                      >
+                        <option value="">Select State</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Others">Others</option>
+                      </select>
                     </div>
                     <div className="form-group">
-                      <label className="form-label">City & State *</label>
-                      <input
-                        type="text"
-                        required
-                        className="form-control"
-                        placeholder="e.g. Vijayawada, AP"
-                        value={formData.cityState}
-                        onChange={(e) => setFormData({ ...formData, cityState: e.target.value })}
-                      />
+                      <label className="form-label">District / City *</label>
+                      {formData.state === 'Andhra Pradesh' ? (
+                        <select
+                          required
+                          className="form-control"
+                          value={formData.city}
+                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        >
+                          <option value="">Select District</option>
+                          {AP_DISTRICTS.map((dist) => (
+                            <option key={dist} value={dist}>
+                              {dist}
+                            </option>
+                          ))}
+                        </select>
+                      ) : formData.state === 'Telangana' ? (
+                        <select
+                          required
+                          className="form-control"
+                          value={formData.city}
+                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        >
+                          <option value="">Select District</option>
+                          {TELANGANA_DISTRICTS.map((dist) => (
+                            <option key={dist} value={dist}>
+                              {dist}
+                            </option>
+                          ))}
+                        </select>
+                      ) : formData.state === 'Others' ? (
+                        <input
+                          type="text"
+                          required
+                          className="form-control"
+                          placeholder="Enter city / district"
+                          value={formData.city}
+                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        />
+                      ) : (
+                        <select className="form-control" disabled value="">
+                          <option value="">Select State First</option>
+                        </select>
+                      )}
                     </div>
                   </div>
 
@@ -113,10 +234,10 @@ export default function DistributorModal({ isOpen, onClose }) {
                       onChange={(e) => setFormData({ ...formData, categoryInterest: e.target.value })}
                     >
                       <option value="All Product Lines">All Hunting Tiger Products</option>
-                      <option value="Electric Mosquito Bats">Electric Mosquito Bats / Rackets</option>
-                      <option value="12-Hour Mosquito Coils">12-Hour Mosquito Coils</option>
-                      <option value="Herbal Incense Sticks">Herbal Agarbatti / Incense</option>
-                      <option value="Garuda Rekha Roach Chalk">Garuda Rekha 3-in-1 Roach Chalk</option>
+                      <option value="Anti Mosquito Agarbatti">Anti Mosquito Agarbatti</option>
+                      <option value="Mosquito Bats & Racquets">Mosquito Bats & Racquets</option>
+                      <option value="Mosquito Coils">Mosquito Coils</option>
+                      <option value="3-in-1 Cockroach Chalk">3-in-1 Cockroach Chalk</option>
                     </select>
                   </div>
 
@@ -158,6 +279,12 @@ export default function DistributorModal({ isOpen, onClose }) {
           </motion.div>
         </motion.div>
       )}
+
+      <style>{`
+        @media (max-width: 550px) {
+          .modal-form-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </AnimatePresence>
   );
 }

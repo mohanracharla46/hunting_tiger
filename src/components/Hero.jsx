@@ -53,8 +53,8 @@ export default function Hero({ onOpenEnquiry }) {
             <motion.h1
               variants={itemVariants}
               style={{
-                fontSize: 'clamp(3rem, 5.2vw, 4.8rem)',
-                lineHeight: 1.0,
+                fontSize: 'clamp(2.1rem, 6.5vw, 4.8rem)',
+                lineHeight: 1.05,
                 color: 'var(--white)',
                 marginBottom: '1.25rem',
                 letterSpacing: '0.02em',
@@ -76,7 +76,7 @@ export default function Hero({ onOpenEnquiry }) {
                 opacity: 0.95,
               }}
             >
-              Heavy-duty electric mosquito swatter rackets, 12-hour protection coils, herbal incense sticks, and 3-in-1 Garuda Rekha chalk — engineered for relentless pest protection by <strong>KSM AND CO., Vijayawada</strong>.
+              Heavy-duty electric mosquito swatter rackets, 12-hour protection coils, herbal incense sticks, and 3-in-1 Garuda Rekha chalk — engineered for relentless pest protection by <strong>KSM AND CO.  Vijayawada</strong>.
             </motion.p>
 
             <motion.div variants={itemVariants} className="hero-btn-group" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
@@ -107,8 +107,8 @@ export default function Hero({ onOpenEnquiry }) {
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '1rem',
-                paddingTop: '1rem',
+                gap: '0.75rem',
+                paddingTop: '0.5rem',
               }}
             >
               <div
@@ -139,7 +139,7 @@ export default function Hero({ onOpenEnquiry }) {
                 }}
               >
                 <Leaf size={18} color="#4EBA4E" />
-                <span><strong>Herbal</strong> Formulations</span>
+                <span><strong>Govt Approved</strong> Formula</span>
               </div>
               <div
                 style={{
@@ -154,7 +154,7 @@ export default function Hero({ onOpenEnquiry }) {
                 }}
               >
                 <MapPin size={18} color="var(--tiger-red)" />
-                <span><strong>Pan-India</strong> Distribution</span>
+                <span><strong>AP & TS</strong> Network</span>
               </div>
             </motion.div>
           </motion.div>

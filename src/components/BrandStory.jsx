@@ -56,7 +56,7 @@ export default function BrandStory() {
             </h2>
 
             <p style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: 'var(--charcoal)', fontWeight: 500 }}>
-              Marketed by <strong>KSM AND CO.</strong> in Vijayawada, Andhra Pradesh, <strong>Hunting Tiger</strong> was forged to solve everyday pest hassles for millions of Indian households.
+              Marketed by <strong>KSM AND CO.</strong> (Nagarjuna Nagar, Vijayawada, AP), <strong>Hunting Tiger</strong> was forged to solve everyday pest hassles for millions of Indian households.
             </p>
 
             <p style={{ fontSize: '1rem', marginBottom: '2rem', color: 'var(--stone-grey)' }}>
@@ -64,7 +64,7 @@ export default function BrandStory() {
             </p>
 
             {/* Feature Points */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+            <div className="story-cards-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
@@ -98,6 +98,9 @@ export default function BrandStory() {
       <style>{`
         @media (max-width: 900px) {
           .story-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+        }
+        @media (max-width: 500px) {
+          .story-cards-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

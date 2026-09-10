@@ -32,9 +32,9 @@ export default function Header({ onOpenEnquiry }) {
         left: 0,
         width: '100%',
         zIndex: 1000,
-        backgroundColor: 'var(--white)',
-        borderBottom: scrolled ? '3px solid var(--tiger-red)' : '2px solid rgba(0,0,0,0.08)',
-        boxShadow: scrolled ? '0 4px 12px rgba(0,0,0,0.08)' : 'none',
+        backgroundColor: 'var(--golden-yellow)',
+        borderBottom: scrolled ? '3px solid var(--tiger-red)' : '2px solid rgba(0,0,0,0.12)',
+        boxShadow: scrolled ? '0 4px 16px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.06)',
         transition: 'all 0.3s ease',
         padding: '0.75rem 0',
       }}
@@ -102,13 +102,13 @@ export default function Header({ onOpenEnquiry }) {
       {mobileMenuOpen && (
         <div
           style={{
-            backgroundColor: 'var(--white)',
+            backgroundColor: 'var(--golden-yellow)',
             borderTop: '2px solid var(--tiger-red)',
             padding: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
             gap: '1.25rem',
-            boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+            boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
           }}
         >
           {navItems.map((item) => (

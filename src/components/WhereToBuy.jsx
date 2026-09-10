@@ -6,8 +6,6 @@ export default function WhereToBuy({ onOpenDistributorModal }) {
   const regions = [
     { state: 'Andhra Pradesh', hubs: 'Vijayawada HQ, Visakhapatnam, Guntur, Tirupati, Kurnool, Rajahmundry', count: '4,500+ Outlets' },
     { state: 'Telangana', hubs: 'Hyderabad, Warangal, Nizamabad, Karimnagar, Khammam', count: '2,800+ Outlets' },
-    { state: 'Tamil Nadu & Karnataka', hubs: 'Chennai, Bengaluru, Mysuru, Vellore, Salem', count: '1,800+ Outlets' },
-    { state: 'Pan-India Distribution', hubs: 'Expanding super-stockist network across Maharashtra, Odisha, MP & North India', count: '1,000+ Outlets' },
   ];
 
   return (
@@ -34,7 +32,7 @@ export default function WhereToBuy({ onOpenDistributorModal }) {
               AVAILABLE AT OVER <span className="text-tiger-red">10,000+ STORES</span> NATIONWIDE.
             </h2>
             <p style={{ fontSize: '1.05rem', color: 'var(--stone-grey)', marginBottom: '2rem' }}>
-              Hunting Tiger products are supplied to leading kirana stores, supermarkets, electrical outlets, and general merchants through our central distribution hub in <strong>Vijayawada</strong>.
+              Hunting Tiger products are supplied to leading kirana stores, supermarkets, electrical outlets, and general merchants through our central distribution hub <strong>Vijayawada</strong>.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
@@ -109,10 +107,15 @@ export default function WhereToBuy({ onOpenDistributorModal }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.98rem', marginBottom: '2rem' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <MapPin size={22} color="var(--golden-yellow)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <span>
-                  Commercial Highway Zone,<br />
-                  Vijayawada, Andhra Pradesh, India
-                </span>
+                <div>
+                  Ward 2A, 48-18-5/1, Road No 5,<br />
+                  Nagarjuna Nagar, OPP-KVKR Municipal Park,<br />
+                  Vijayawada, Krishna (District),<br />
+                  State Name: Andhra Pradesh (Code: 37)<br />
+                  <div style={{ marginTop: '0.35rem', color: 'var(--golden-yellow)', fontWeight: 700, letterSpacing: '0.03em' }}>
+                    GSTIN/UIN: 37CBRPK8835R1ZD
+                  </div>
+                </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <Phone size={20} color="var(--golden-yellow)" style={{ flexShrink: 0, marginTop: '3px' }} />

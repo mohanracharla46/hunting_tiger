@@ -121,8 +121,13 @@ export default function Footer() {
             </h4>
             <div style={{ fontSize: '0.92rem', color: '#C0C0BA', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div>
-                <strong style={{ color: 'var(--golden-yellow)' }}>KSM AND CO.</strong><br />
-                Vijayawada, Andhra Pradesh, India
+                <strong style={{ color: 'var(--golden-yellow)', fontSize: '1rem' }}>KSM AND CO.</strong><br />
+                Ward 2A, 48-18-5/1, Road No 5,<br />
+                Nagarjuna Nagar, OPP-KVKR Municipal Park,<br />
+                Vijayawada, Krishna (District), AP - Code 37<br />
+                <span style={{ color: 'var(--golden-yellow)', fontWeight: 600, fontSize: '0.85rem' }}>
+                  GSTIN/UIN: 37CBRPK8835R1ZD
+                </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                 <Phone size={16} color="var(--tiger-red)" style={{ flexShrink: 0, marginTop: '3px' }} />

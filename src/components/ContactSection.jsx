@@ -2,15 +2,88 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, PhoneCall, MapPin, Mail, Clock, CheckCircle2 } from 'lucide-react';
 
+const AP_DISTRICTS = [
+  'Alluri Sitharama Raju',
+  'Anakapalli',
+  'Ananthapuramu',
+  'Annamayya',
+  'Bapatla',
+  'Chittoor',
+  'East Godavari',
+  'Eluru',
+  'Guntur',
+  'Kakinada',
+  'Konaseema (Dr. B.R. Ambedkar Konaseema)',
+  'NTR (Vijayawada)',
+  'Nandyal',
+  'Palnadu',
+  'Parvathipuram Manyam',
+  'Prakasam',
+  'Sri Potti Sriramulu Nellore',
+  'Sri Sathya Sai',
+  'Srikakulam',
+  'Tirupati',
+  'Visakhapatnam',
+  'Vizianagaram',
+  'West Godavari',
+  'YSR Kadapa',
+];
+
+const TELANGANA_DISTRICTS = [
+  'Adilabad',
+  'Bhadradri Kothagudem',
+  'Hanumakonda',
+  'Hyderabad',
+  'Jagtial',
+  'Jangaon',
+  'Jayashankar Bhupalpally',
+  'Jogulamba Gadwal',
+  'Kamareddy',
+  'Karimnagar',
+  'Khammam',
+  'Kumuram Bheem Asifabad',
+  'Mahabubabad',
+  'Mahabubnagar',
+  'Mancherial',
+  'Medak',
+  'Medchal-Malkajgiri',
+  'Mulugu',
+  'Nagarkurnool',
+  'Nalgonda',
+  'Narayanpet',
+  'Nirmal',
+  'Nizamabad',
+  'Peddapalli',
+  'Rajanna Sircilla',
+  'Ranga Reddy',
+  'Sangareddy',
+  'Siddipet',
+  'Suryapet',
+  'Vikarabad',
+  'Wanaparthy',
+  'Warangal',
+  'Yadadri Bhuvanagiri',
+];
+
 export default function ContactSection({ selectedProduct }) {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    state: '',
     city: '',
     product: selectedProduct ? selectedProduct.name : 'General Enquiry',
     message: '',
   });
+
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      state: selectedState,
+      city: '',
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,28 +150,78 @@ export default function ContactSection({ selectedProduct }) {
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="form-group">
+                  <label className="form-label">Phone Number *</label>
+                  <input
+                    type="tel"
+                    required
+                    className="form-control"
+                    placeholder="10-digit mobile number"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-row-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                   <div className="form-group">
-                    <label className="form-label">Phone Number *</label>
-                    <input
-                      type="tel"
+                    <label className="form-label">State *</label>
+                    <select
                       required
                       className="form-control"
-                      placeholder="10-digit mobile"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
+                      value={formData.state}
+                      onChange={handleStateChange}
+                    >
+                      <option value="">Select State</option>
+                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+                      <option value="Telangana">Telangana</option>
+                      <option value="Others">Others</option>
+                    </select>
                   </div>
+
                   <div className="form-group">
-                    <label className="form-label">City / Location *</label>
-                    <input
-                      type="text"
-                      required
-                      className="form-control"
-                      placeholder="e.g. Vijayawada"
-                      value={formData.city}
-                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    />
+                    <label className="form-label">District / City *</label>
+                    {formData.state === 'Andhra Pradesh' ? (
+                      <select
+                        required
+                        className="form-control"
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      >
+                        <option value="">Select District</option>
+                        {AP_DISTRICTS.map((dist) => (
+                          <option key={dist} value={dist}>
+                            {dist}
+                          </option>
+                        ))}
+                      </select>
+                    ) : formData.state === 'Telangana' ? (
+                      <select
+                        required
+                        className="form-control"
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      >
+                        <option value="">Select District</option>
+                        {TELANGANA_DISTRICTS.map((dist) => (
+                          <option key={dist} value={dist}>
+                            {dist}
+                          </option>
+                        ))}
+                      </select>
+                    ) : formData.state === 'Others' ? (
+                      <input
+                        type="text"
+                        required
+                        className="form-control"
+                        placeholder="Enter city / district"
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      />
+                    ) : (
+                      <select className="form-control" disabled value="">
+                        <option value="">Select State First</option>
+                      </select>
+                    )}
                   </div>
                 </div>
 
@@ -182,9 +305,14 @@ export default function ContactSection({ selectedProduct }) {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <MapPin size={22} color="var(--tiger-red)" style={{ flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <strong style={{ color: 'var(--golden-yellow)' }}>KSM AND CO.</strong><br />
-                    Commercial Highway Complex, Near Benz Circle,<br />
-                    Vijayawada, Andhra Pradesh, India
+                    <strong style={{ color: 'var(--golden-yellow)', fontSize: '1.05rem' }}>KSM AND CO.</strong><br />
+                    Ward 2A, 48-18-5/1, Road No 5,<br />
+                    Nagarjuna Nagar, OPP-KVKR Municipal Park,<br />
+                    Vijayawada, Krishna (District),<br />
+                    State Name: Andhra Pradesh (Code: 37)<br />
+                    <div style={{ marginTop: '0.4rem', color: 'var(--golden-yellow)', fontWeight: 700, letterSpacing: '0.03em' }}>
+                      GSTIN/UIN: 37CBRPK8835R1ZD
+                    </div>
                   </div>
                 </div>
 
@@ -235,6 +363,10 @@ export default function ContactSection({ selectedProduct }) {
       <style>{`
         @media (max-width: 900px) {
           .contact-split { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 500px) {
+          .contact-split > div { padding: 1.5rem 1rem !important; }
+          .form-row-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
