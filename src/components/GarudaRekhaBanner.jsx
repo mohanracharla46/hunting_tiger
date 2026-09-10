@@ -72,11 +72,11 @@ export default function GarudaRekhaBanner({ onEnquire }) {
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
               <motion.div whileHover={{ scale: 1.05 }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#2B2B2B', padding: '0.55rem 1rem', borderRadius: '3px' }}>
-                <Bug size={18} color="var(--golden-yellow)" />
+                <Bug size={18} color="var(--tiger-red)" />
                 <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Kills Cockroaches</span>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#2B2B2B', padding: '0.55rem 1rem', borderRadius: '3px' }}>
-                <AntIcon size={18} color="var(--golden-yellow)" />
+                <AntIcon size={18} color="var(--tiger-red)" />
                 <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Kills Ants</span>
               </motion.div>
             </div>
