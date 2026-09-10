@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, Building2 } from 'lucide-react';
+import { X, CheckCircle2, Building2, Loader2, AlertCircle } from 'lucide-react';
+import { submitDistributorApplication } from '../services/apiService';
 
 const AP_DISTRICTS = [
   'Alluri Sitharama Raju',
@@ -67,14 +68,15 @@ const TELANGANA_DISTRICTS = [
 
 export default function DistributorModal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [formData, setFormData] = useState({
-    businessName: '',
-    contactPerson: '',
+    business_name: '',
+    contact_person: '',
     phone: '',
-    email: '',
     state: '',
-    city: '',
-    categoryInterest: 'All Product Lines',
+    district_city: '',
+    primary_interest: 'All Product Lines',
   });
 
   const handleStateChange = (e) => {
@@ -82,13 +84,38 @@ export default function DistributorModal({ isOpen, onClose }) {
     setFormData((prev) => ({
       ...prev,
       state: selectedState,
-      city: '',
+      district_city: '',
     }));
   };
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setFormData({
+      business_name: '',
+      contact_person: '',
+      phone: '',
+      state: '',
+      district_city: '',
+      primary_interest: 'All Product Lines',
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setErrorMsg('');
+    try {
+      const res = await submitDistributorApplication(formData);
+      if (res && res.success) {
+        setSubmitted(true);
+        resetForm();
+      } else {
+        setErrorMsg(res?.message || 'Failed to submit application. Please try again.');
+      }
+    } catch (err) {
+      setErrorMsg('An unexpected error occurred. Please check connection.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -126,6 +153,13 @@ export default function DistributorModal({ isOpen, onClose }) {
                   Join KSM AND CO.’s nationwide dealer network. Fill out the application below for direct wholesale pricing and stockist terms.
                 </p>
 
+                {errorMsg && (
+                  <div style={{ padding: '0.75rem 1rem', marginBottom: '1rem', backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: '4px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <AlertCircle size={18} />
+                    <span>{errorMsg}</span>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit}>
                   <div className="modal-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <div className="form-group">
@@ -135,8 +169,8 @@ export default function DistributorModal({ isOpen, onClose }) {
                         required
                         className="form-control"
                         placeholder="e.g. Sri Rama Traders"
-                        value={formData.businessName}
-                        onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                        value={formData.business_name}
+                        onChange={(e) => setFormData({ ...formData, business_name: e.target.value })}
                       />
                     </div>
                     <div className="form-group">
@@ -146,8 +180,8 @@ export default function DistributorModal({ isOpen, onClose }) {
                         required
                         className="form-control"
                         placeholder="Full Name"
-                        value={formData.contactPerson}
-                        onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
+                        value={formData.contact_person}
+                        onChange={(e) => setFormData({ ...formData, contact_person: e.target.value })}
                       />
                     </div>
                   </div>
@@ -185,8 +219,8 @@ export default function DistributorModal({ isOpen, onClose }) {
                         <select
                           required
                           className="form-control"
-                          value={formData.city}
-                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                          value={formData.district_city}
+                          onChange={(e) => setFormData({ ...formData, district_city: e.target.value })}
                         >
                           <option value="">Select District</option>
                           {AP_DISTRICTS.map((dist) => (
@@ -199,8 +233,8 @@ export default function DistributorModal({ isOpen, onClose }) {
                         <select
                           required
                           className="form-control"
-                          value={formData.city}
-                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                          value={formData.district_city}
+                          onChange={(e) => setFormData({ ...formData, district_city: e.target.value })}
                         >
                           <option value="">Select District</option>
                           {TELANGANA_DISTRICTS.map((dist) => (
@@ -215,8 +249,8 @@ export default function DistributorModal({ isOpen, onClose }) {
                           required
                           className="form-control"
                           placeholder="Enter city / district"
-                          value={formData.city}
-                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                          value={formData.district_city}
+                          onChange={(e) => setFormData({ ...formData, district_city: e.target.value })}
                         />
                       ) : (
                         <select className="form-control" disabled value="">
@@ -230,8 +264,8 @@ export default function DistributorModal({ isOpen, onClose }) {
                     <label className="form-label">Primary Interest</label>
                     <select
                       className="form-control"
-                      value={formData.categoryInterest}
-                      onChange={(e) => setFormData({ ...formData, categoryInterest: e.target.value })}
+                      value={formData.primary_interest}
+                      onChange={(e) => setFormData({ ...formData, primary_interest: e.target.value })}
                     >
                       <option value="All Product Lines">All Hunting Tiger Products</option>
                       <option value="Anti Mosquito Agarbatti">Anti Mosquito Agarbatti</option>
@@ -242,13 +276,20 @@ export default function DistributorModal({ isOpen, onClose }) {
                   </div>
 
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: submitting ? 1 : 1.02 }}
+                    whileTap={{ scale: submitting ? 1 : 0.98 }}
                     type="submit"
+                    disabled={submitting}
                     className="btn btn-primary"
-                    style={{ width: '100%', marginTop: '1rem' }}
+                    style={{ width: '100%', marginTop: '1rem', opacity: submitting ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
                   >
-                    Submit Distributorship Application
+                    {submitting ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" /> Submitting...
+                      </>
+                    ) : (
+                      'Submit Distributorship Application'
+                    )}
                   </motion.button>
                 </form>
               </div>
@@ -263,7 +304,7 @@ export default function DistributorModal({ isOpen, onClose }) {
                   APPLICATION RECEIVED!
                 </h3>
                 <p style={{ fontSize: '1rem', color: 'var(--stone-grey)', marginBottom: '1.5rem' }}>
-                  Thank you, <strong>{formData.contactPerson}</strong>. Our regional distribution desk from <strong>KSM AND CO., Vijayawada</strong> will review your details and contact you via <strong>{formData.phone}</strong> within 24 business hours.
+                  Thank you, <strong>{formData.contact_person}</strong>. Our regional distribution desk from <strong>KSM AND CO., Vijayawada</strong> will review your details and contact you via <strong>{formData.phone}</strong> within 24 business hours.
                 </p>
                 <button
                   className="btn btn-outline-dark"

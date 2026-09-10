@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send, PhoneCall, MapPin, Mail, Clock, CheckCircle2 } from 'lucide-react';
+import { Send, PhoneCall, MapPin, Mail, Clock, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+import { submitEnquiry } from '../services/apiService';
 
 const AP_DISTRICTS = [
   'Alluri Sitharama Raju',
@@ -67,27 +68,60 @@ const TELANGANA_DISTRICTS = [
 
 export default function ContactSection({ selectedProduct }) {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [formData, setFormData] = useState({
-    name: '',
+    full_name: '',
     phone: '',
     state: '',
-    city: '',
-    product: selectedProduct ? selectedProduct.name : 'General Enquiry',
+    district_city: '',
+    product_interest: selectedProduct ? selectedProduct.name : 'General Enquiry',
     message: '',
   });
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setFormData((prev) => ({ ...prev, product_interest: selectedProduct.name }));
+    }
+  }, [selectedProduct]);
 
   const handleStateChange = (e) => {
     const selectedState = e.target.value;
     setFormData((prev) => ({
       ...prev,
       state: selectedState,
-      city: '',
+      district_city: '',
     }));
   };
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setFormData({
+      full_name: '',
+      phone: '',
+      state: '',
+      district_city: '',
+      product_interest: selectedProduct ? selectedProduct.name : 'General Enquiry',
+      message: '',
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setSubmitting(true);
+    setErrorMsg('');
+    try {
+      const res = await submitEnquiry(formData);
+      if (res && res.success) {
+        setFormSubmitted(true);
+        resetForm();
+      } else {
+        setErrorMsg(res?.message || 'Failed to submit enquiry. Please try again.');
+      }
+    } catch (err) {
+      setErrorMsg('An unexpected error occurred. Please check connection.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -138,6 +172,13 @@ export default function ContactSection({ selectedProduct }) {
                   QUICK ENQUIRY FORM
                 </h3>
 
+                {errorMsg && (
+                  <div style={{ padding: '0.75rem 1rem', marginBottom: '1rem', backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: '4px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <AlertCircle size={18} />
+                    <span>{errorMsg}</span>
+                  </div>
+                )}
+
                 <div className="form-group">
                   <label className="form-label">Your Full Name *</label>
                   <input
@@ -145,8 +186,8 @@ export default function ContactSection({ selectedProduct }) {
                     required
                     className="form-control"
                     placeholder="Enter your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    value={formData.full_name}
+                    onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                   />
                 </div>
 
@@ -184,8 +225,8 @@ export default function ContactSection({ selectedProduct }) {
                       <select
                         required
                         className="form-control"
-                        value={formData.city}
-                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        value={formData.district_city}
+                        onChange={(e) => setFormData({ ...formData, district_city: e.target.value })}
                       >
                         <option value="">Select District</option>
                         {AP_DISTRICTS.map((dist) => (
@@ -198,8 +239,8 @@ export default function ContactSection({ selectedProduct }) {
                       <select
                         required
                         className="form-control"
-                        value={formData.city}
-                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        value={formData.district_city}
+                        onChange={(e) => setFormData({ ...formData, district_city: e.target.value })}
                       >
                         <option value="">Select District</option>
                         {TELANGANA_DISTRICTS.map((dist) => (
@@ -214,8 +255,8 @@ export default function ContactSection({ selectedProduct }) {
                         required
                         className="form-control"
                         placeholder="Enter city / district"
-                        value={formData.city}
-                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        value={formData.district_city}
+                        onChange={(e) => setFormData({ ...formData, district_city: e.target.value })}
                       />
                     ) : (
                       <select className="form-control" disabled value="">
@@ -230,8 +271,8 @@ export default function ContactSection({ selectedProduct }) {
                   <input
                     type="text"
                     className="form-control"
-                    value={formData.product}
-                    onChange={(e) => setFormData({ ...formData, product: e.target.value })}
+                    value={formData.product_interest}
+                    onChange={(e) => setFormData({ ...formData, product_interest: e.target.value })}
                   />
                 </div>
 
@@ -247,13 +288,22 @@ export default function ContactSection({ selectedProduct }) {
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: submitting ? 1 : 1.02 }}
+                  whileTap={{ scale: submitting ? 1 : 0.98 }}
                   type="submit"
+                  disabled={submitting}
                   className="btn btn-primary"
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', opacity: submitting ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
                 >
-                  <Send size={18} /> Submit Enquiry
+                  {submitting ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" /> Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} /> Submit Enquiry
+                    </>
+                  )}
                 </motion.button>
               </form>
             ) : (
@@ -267,7 +317,7 @@ export default function ContactSection({ selectedProduct }) {
                   ENQUIRY SUBMITTED!
                 </h3>
                 <p style={{ fontSize: '1rem', color: 'var(--stone-grey)', marginBottom: '1.5rem' }}>
-                  Thank you <strong>{formData.name}</strong>. Our Vijayawada desk will reach out to you shortly at <strong>{formData.phone}</strong>.
+                  Thank you <strong>{formData.full_name}</strong>. Our Vijayawada desk will reach out to you shortly at <strong>{formData.phone}</strong>.
                 </p>
                 <button className="btn btn-outline-dark" onClick={() => setFormSubmitted(false)}>
                   Send Another Enquiry

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Phone, Mail, Share2, Globe, MessageSquare } from 'lucide-react';
+import { Phone, Mail, Share2, Globe, MessageSquare } from 'lucide-react';
 
 export default function Footer() {
   return (
