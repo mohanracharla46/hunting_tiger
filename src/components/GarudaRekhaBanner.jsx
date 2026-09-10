@@ -52,7 +52,7 @@ export default function GarudaRekhaBanner({ onEnquire }) {
 
           <div>
             <div className="section-tag" style={{ backgroundColor: 'var(--golden-yellow)', color: 'var(--charcoal)' }}>
-              SPECIALTY PEST FORMULA
+              SPECIALITY PEST FORMULA
             </div>
             <h2
               style={{

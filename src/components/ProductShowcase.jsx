@@ -106,7 +106,7 @@ export default function ProductShowcase({ onSelectProduct }) {
         name: 'Garuda Rekha Herbal Incense Box',
         mrp: '₹15.00',
         badge: 'GARUDA EDITION',
-        benefit: 'Specialty ₹15 herbal agarbatti box with Garuda wings logo formula.',
+        benefit: 'Speciality ₹15 herbal agarbatti box with Garuda wings logo formula.',
         specs: ['Sticks - 10, Strips - 12', 'Natural Repellent Formula', 'Ayurvedic Botanical Blend'],
         image: '/images/image4.png',
         color: 'var(--charcoal)',
