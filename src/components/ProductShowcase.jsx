@@ -7,10 +7,10 @@ export default function ProductShowcase({ onSelectProduct }) {
   const [activeCategory, setActiveCategory] = useState('incense');
 
   const categories = [
-    { id: 'incense', label: 'A. Anti Mosquito Agarbatti', icon: IncenseIcon },
-    { id: 'bats', label: 'B. Mosquito Bats & Racquets', icon: MosquitoBatIcon },
-    { id: 'coils', label: 'C. Mosquito Coils', icon: CoilIcon },
-    { id: 'chalk', label: 'D. 3-in-1 Cockroach Chalk', icon: CockroachChalkIcon },
+    { id: 'incense', prefix: 'A.', label: 'Anti Mosquito Agarbatti', icon: IncenseIcon },
+    { id: 'bats', prefix: 'B.', label: 'Mosquito Bats & Racquets', icon: MosquitoBatIcon },
+    { id: 'coils', prefix: 'C.', label: 'Mosquito Coils', icon: CoilIcon },
+    { id: 'chalk', prefix: 'D.', label: '3-in-1 Cockroach Chalk', icon: CockroachChalkIcon },
   ];
 
   const productsData = {
@@ -189,8 +189,9 @@ export default function ProductShowcase({ onSelectProduct }) {
                   transition: 'all 0.15s ease',
                 }}
               >
+                <span>{cat.prefix}</span>
                 <Icon size={24} color={isActive ? 'var(--white)' : 'var(--tiger-red)'} />
-                {cat.label}
+                <span>{cat.label}</span>
               </motion.button>
             );
           })}

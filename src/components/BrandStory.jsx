@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 export default function BrandStory() {
   return (
@@ -58,9 +59,23 @@ export default function BrandStory() {
               Marketed by <strong>KSM AND CO.</strong> (Nagarjuna Nagar, Vijayawada, AP), <strong>Hunting Tiger</strong> was forged to solve everyday pest hassles for millions of Indian households.
             </p>
 
-            <p style={{ fontSize: '1rem', marginBottom: '0', color: 'var(--stone-grey)' }}>
+            <p style={{ fontSize: '1rem', marginBottom: '1.5rem', color: 'var(--stone-grey)' }}>
               From high-voltage rechargeable mosquito swatters to 12-hour slow-burn coils, natural herbal agarbatti incense sticks, and the famed 3-in-1 Garuda Rekha roach chalk — every product is engineered for high efficacy, affordability, and total family safety.
             </p>
+
+            {/* Single Feature Card Point */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="flat-card"
+              style={{ backgroundColor: 'var(--white)', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
+                <Sparkles size={22} color="var(--herbal-green)" />
+                <h4 style={{ fontSize: '1.05rem' }}>Herbal First</h4>
+              </div>
+              <p style={{ fontSize: '0.88rem', margin: 0 }}>Natural ingredients formula safe for kids and domestic spaces.</p>
+            </motion.div>
           </motion.div>
         </div>
       </div>
