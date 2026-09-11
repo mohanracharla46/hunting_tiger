@@ -29,7 +29,7 @@ export default function WhereToBuy({ onOpenDistributorModal }) {
           >
             <div className="section-tag section-tag-red">RETAIL NETWORK & STOCKISTS</div>
             <h2 className="section-heading" style={{ marginBottom: '1.5rem', color: 'var(--charcoal)' }}>
-              AVAILABLE AT OVER <span className="text-tiger-red">10,000+ STORES</span> NATIONWIDE.
+              AVAILABLE AT OVER <span className="text-tiger-red">10,000+ STORES</span> IN AP & TS.
             </h2>
             <p style={{ fontSize: '1.05rem', color: 'var(--stone-grey)', marginBottom: '2rem' }}>
               Hunting Tiger products are supplied to leading kirana stores, supermarkets, electrical outlets, and general merchants through our central distribution hub <strong>Vijayawada</strong>.
