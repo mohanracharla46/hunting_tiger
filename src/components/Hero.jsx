@@ -220,18 +220,6 @@ export default function Hero({ onOpenEnquiry }) {
         </div>
       </div>
 
-      {/* Solid Angled Divider into Cream Section */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: '100%',
-          height: '40px',
-          backgroundColor: 'var(--cream)',
-          clipPath: 'polygon(0 100%, 100% 100%, 100% 0)',
-        }}
-      />
 
       <style>{`
         @media (max-width: 992px) {
