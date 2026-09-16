@@ -159,7 +159,7 @@ export default function Hero({ onOpenEnquiry }) {
             </motion.div>
           </motion.div>
 
-          {/* Right Square Big Video Showcase matching left height */}
+          {/* Right Dual Video Showcase matching left height */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -168,52 +168,115 @@ export default function Hero({ onOpenEnquiry }) {
           >
             <div
               style={{
-                backgroundColor: 'var(--charcoal)',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.25rem',
                 width: '100%',
-                maxWidth: '500px',
-                aspectRatio: '1 / 1',
-                overflow: 'hidden',
-                borderRadius: '4px',
+                maxWidth: '520px',
               }}
             >
-              {/* Clean Square Video Player - Default Muted, Autoplay, Loop with Browser Controls Suppressed */}
-              <video
-                src="/videos/hero.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                disablePictureInPicture
-                disableRemotePlayback
-                controlsList="nodownload no-supported-media-actions noplaybackrate nofullscreen"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                  pointerEvents: 'none',
-                  userSelect: 'none',
-                }}
-              />
-
-              {/* Bold Badge Overlay */}
+              {/* Video 1 Showcase */}
               <div
                 style={{
-                  position: 'absolute',
-                  bottom: '0',
-                  right: '0',
-                  backgroundColor: 'var(--golden-yellow)',
-                  color: 'var(--charcoal)',
-                  padding: '0.6rem 1.25rem',
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 700,
-                  fontSize: '1rem',
-                  letterSpacing: '0.05em',
+                  backgroundColor: 'var(--charcoal)',
+                  boxShadow: '0 15px 30px rgba(0,0,0,0.4)',
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  overflow: 'hidden',
+                  borderRadius: '6px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                 }}
               >
-                FLAGSHIP COMMERCIAL • KSM AND CO.
+                {/* Clean Video Player 1 */}
+                <video
+                  src="/videos/hero.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  controlsList="nodownload no-supported-media-actions noplaybackrate nofullscreen"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                  }}
+                />
+
+                {/* Badge Overlay */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    right: '0',
+                    backgroundColor: 'var(--golden-yellow)',
+                    color: 'var(--charcoal)',
+                    padding: '0.4rem 0.9rem',
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 700,
+                    fontSize: '0.82rem',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  FLAGSHIP COMMERCIAL • KSM AND CO.
+                </div>
+              </div>
+
+              {/* Video 2 Showcase */}
+              <div
+                style={{
+                  backgroundColor: 'var(--charcoal)',
+                  boxShadow: '0 15px 30px rgba(0,0,0,0.4)',
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  overflow: 'hidden',
+                  borderRadius: '6px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+              >
+                {/* Clean Video Player 2 */}
+                <video
+                  src="/videos/hero1.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  controlsList="nodownload no-supported-media-actions noplaybackrate nofullscreen"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                  }}
+                />
+
+                {/* Badge Overlay */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    right: '0',
+                    backgroundColor: 'var(--tiger-red)',
+                    color: 'var(--white)',
+                    padding: '0.4rem 0.9rem',
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 700,
+                    fontSize: '0.82rem',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  PRODUCT DEMO • HUNTING TIGER
+                </div>
               </div>
             </div>
           </motion.div>
