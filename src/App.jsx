@@ -9,8 +9,10 @@ import WhereToBuy from './components/WhereToBuy';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import DistributorModal from './components/DistributorModal';
+import AdPopupModal from './components/AdPopupModal';
 import AdminDashboard from './components/AdminDashboard';
 import AdminLogin from './components/AdminLogin';
+import { Flame } from 'lucide-react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState(() => {
@@ -20,7 +22,16 @@ export default function App() {
     return sessionStorage.getItem('hunting_tiger_admin_auth') === 'true';
   });
   const [isDistributorModalOpen, setIsDistributorModalOpen] = useState(false);
+  const [isAdModalOpen, setIsAdModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Auto-open ad popup when user opens website
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAdModalOpen(true);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Sync URL changes with view state
   useEffect(() => {
@@ -82,6 +93,13 @@ export default function App() {
     }
   };
 
+  const handleScrollToProducts = () => {
+    const elem = document.getElementById('products');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleSelectProduct = (product) => {
     setSelectedProduct(product);
     handleOpenEnquiry();
@@ -105,9 +123,10 @@ export default function App() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <Header
         onOpenEnquiry={() => setIsDistributorModalOpen(true)}
+        onOpenAd={() => setIsAdModalOpen(true)}
       />
       
       <main style={{ flexGrow: 1 }}>
@@ -122,6 +141,47 @@ export default function App() {
 
       <Footer />
 
+      {/* Floating Offer Button to re-open advertisement popup */}
+      <button
+        onClick={() => setIsAdModalOpen(true)}
+        style={{
+          position: 'fixed',
+          bottom: '1.5rem',
+          right: '1.5rem',
+          zIndex: 900,
+          background: 'var(--tiger-red)',
+          color: '#FFFFFF',
+          border: '2px solid #FFFFFF',
+          borderRadius: '30px',
+          padding: '0.6rem 1.1rem',
+          fontFamily: 'var(--font-display)',
+          fontSize: '0.88rem',
+          fontWeight: 700,
+          letterSpacing: '0.05em',
+          cursor: 'pointer',
+          boxShadow: '0 8px 20px rgba(227, 30, 36, 0.4)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          transition: 'transform 0.2s ease, background-color 0.2s ease',
+        }}
+        className="floating-ad-btn"
+        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+      >
+        <Flame size={18} color="var(--golden-yellow)" />
+        <span>SPECIAL OFFER AD</span>
+      </button>
+
+      {/* Auto Ad Popup Modal */}
+      <AdPopupModal
+        isOpen={isAdModalOpen}
+        onClose={() => setIsAdModalOpen(false)}
+        onClaimOffer={() => setIsDistributorModalOpen(true)}
+        onViewProducts={handleScrollToProducts}
+      />
+
+      {/* Distributor Application Modal */}
       <DistributorModal
         isOpen={isDistributorModalOpen}
         onClose={() => setIsDistributorModalOpen(false)}

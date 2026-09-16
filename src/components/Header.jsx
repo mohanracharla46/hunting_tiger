@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, PhoneCall } from 'lucide-react';
 
-export default function Header({ onOpenEnquiry }) {
+export default function Header({ onOpenEnquiry, onOpenAd }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -58,7 +58,7 @@ export default function Header({ onOpenEnquiry }) {
         </a>
 
         {/* Desktop Nav */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="desktop-nav">
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }} className="desktop-nav">
           {navItems.map((item) => (
             <a
               key={item.label}
@@ -78,7 +78,32 @@ export default function Header({ onOpenEnquiry }) {
               {item.label}
             </a>
           ))}
-          
+
+          {onOpenAd && (
+            <button
+              onClick={onOpenAd}
+              style={{
+                background: 'var(--tiger-red)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '0.4rem 0.8rem',
+                borderRadius: '4px',
+                fontFamily: 'var(--font-display)',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                boxShadow: '0 2px 6px rgba(227, 30, 36, 0.3)'
+              }}
+            >
+              🔥 SPECIAL AD
+            </button>
+          )}
+
           <button className="btn btn-primary" onClick={onOpenEnquiry}>
             <PhoneCall size={18} /> Enquire Now
           </button>
@@ -130,6 +155,25 @@ export default function Header({ onOpenEnquiry }) {
               {item.label}
             </a>
           ))}
+          {onOpenAd && (
+            <button
+              onClick={() => { setMobileMenuOpen(false); onOpenAd(); }}
+              style={{
+                background: 'var(--tiger-red)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '0.8rem',
+                borderRadius: '4px',
+                fontFamily: 'var(--font-display)',
+                fontSize: '1rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                textAlign: 'center'
+              }}
+            >
+              🔥 VIEW SPECIAL OFFER AD
+            </button>
+          )}
           <button className="btn btn-primary" style={{ width: '100%' }} onClick={() => { setMobileMenuOpen(false); onOpenEnquiry(); }}>
             <PhoneCall size={18} /> Enquire Now
           </button>
