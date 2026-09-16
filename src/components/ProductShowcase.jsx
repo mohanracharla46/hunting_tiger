@@ -7,10 +7,10 @@ export default function ProductShowcase({ onSelectProduct }) {
   const [activeCategory, setActiveCategory] = useState('incense');
 
   const categories = [
-    { id: 'incense', prefix: 'A.', label: 'Anti Mosquito Agarbatti', icon: IncenseIcon },
-    { id: 'bats', prefix: 'B.', label: 'Mosquito Bats & Racquets', icon: MosquitoBatIcon },
-    { id: 'coils', prefix: 'C.', label: 'Mosquito Coils', icon: CoilIcon },
-    { id: 'chalk', prefix: 'D.', label: '3-in-1 Cockroach Chalk', icon: CockroachChalkIcon },
+    { id: 'incense', prefix: '', label: 'Anti Mosquito Agarbatti', icon: IncenseIcon },
+    { id: 'bats', prefix: '', label: 'Mosquito Bats & Racquets', icon: MosquitoBatIcon },
+    { id: 'coils', prefix: '', label: 'Mosquito Coils', icon: CoilIcon },
+    { id: 'chalk', prefix: '', label: '3-in-1 Cockroach Chalk', icon: CockroachChalkIcon },
   ];
 
   const productsData = {
