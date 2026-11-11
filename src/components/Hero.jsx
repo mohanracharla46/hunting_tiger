@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Leaf, MapPin } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Landmark, MapPin } from 'lucide-react';
 
 export default function Hero({ onOpenEnquiry }) {
   const containerVariants = {
@@ -64,20 +64,48 @@ export default function Hero({ onOpenEnquiry }) {
               <span style={{ color: 'var(--golden-yellow)' }}>TRUSTED TO PROTECT.</span>
             </motion.h1>
 
-            <motion.p
+            <motion.div
               variants={itemVariants}
               style={{
-                fontSize: '1.18rem',
-                color: 'var(--cream)',
-                marginBottom: '2.25rem',
-                maxWidth: '560px',
-                lineHeight: 1.6,
-                fontWeight: 400,
+                marginBottom: '2rem',
+                maxWidth: '600px',
                 opacity: 0.95,
               }}
             >
-              Heavy-duty electric mosquito swatter rackets, 12-hour protection coils, herbal incense sticks, and 3-in-1 Garuda Rekha chalk — engineered for relentless pest protection by <strong>KSM AND CO.  Vijayawada</strong>.
-            </motion.p>
+              <p
+                style={{
+                  fontSize: '1.02rem',
+                  color: 'var(--cream)',
+                  lineHeight: 1.6,
+                  fontWeight: 400,
+                  marginBottom: '0.75rem',
+                }}
+              >
+                KSM AND CO has launched Hunting Tiger Brand in 2020 currently experiencing rapid growth in Pest management solutions with low price point across Andhra Pradesh and Telangana.
+              </p>
+              <p
+                style={{
+                  fontSize: '1.02rem',
+                  color: 'var(--cream)',
+                  lineHeight: 1.6,
+                  fontWeight: 400,
+                  marginBottom: '0.75rem',
+                }}
+              >
+                KSM AND CO; Based in South India, we specialize in engineering high-performance, heavy-duty defences designed to eradicate both flying and crawling insects.
+              </p>
+              <p
+                style={{
+                  fontSize: '1.02rem',
+                  color: 'var(--cream)',
+                  lineHeight: 1.6,
+                  fontWeight: 400,
+                  marginBottom: 0,
+                }}
+              >
+                Combining government-approved formulas with industrial-grade reliability, our mission is to deliver uncompromising safety and continuous protection for homes, businesses, and communities.
+              </p>
+            </motion.div>
 
             <motion.div variants={itemVariants} className="hero-btn-group" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
               <motion.a
@@ -138,7 +166,7 @@ export default function Hero({ onOpenEnquiry }) {
                   color: 'var(--cream)',
                 }}
               >
-                <Leaf size={18} color="#4EBA4E" />
+                <Landmark size={18} color="#4EBA4E" />
                 <span><strong>Govt Approved</strong> Formula</span>
               </div>
               <div
@@ -159,7 +187,7 @@ export default function Hero({ onOpenEnquiry }) {
             </motion.div>
           </motion.div>
 
-          {/* Right Dual Video Showcase matching left height */}
+          {/* Right Video Showcase */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -168,27 +196,24 @@ export default function Hero({ onOpenEnquiry }) {
           >
             <div
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.25rem',
                 width: '100%',
-                maxWidth: '520px',
+                maxWidth: '480px',
               }}
             >
-              {/* Video 1 Showcase */}
+              {/* Single Video Showcase */}
               <div
                 style={{
                   backgroundColor: 'var(--charcoal)',
-                  boxShadow: '0 15px 30px rgba(0,0,0,0.4)',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
                   position: 'relative',
                   width: '100%',
-                  aspectRatio: '16 / 9',
+                  aspectRatio: '1 / 1',
                   overflow: 'hidden',
-                  borderRadius: '6px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
                 }}
               >
-                {/* Clean Video Player 1 */}
+                {/* Clean Video Player */}
                 <video
                   src="/videos/hero.mp4"
                   autoPlay
@@ -224,58 +249,6 @@ export default function Hero({ onOpenEnquiry }) {
                   }}
                 >
                   FLAGSHIP COMMERCIAL • KSM AND CO.
-                </div>
-              </div>
-
-              {/* Video 2 Showcase */}
-              <div
-                style={{
-                  backgroundColor: 'var(--charcoal)',
-                  boxShadow: '0 15px 30px rgba(0,0,0,0.4)',
-                  position: 'relative',
-                  width: '100%',
-                  aspectRatio: '16 / 9',
-                  overflow: 'hidden',
-                  borderRadius: '6px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                }}
-              >
-                {/* Clean Video Player 2 */}
-                <video
-                  src="/videos/hero1.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  disablePictureInPicture
-                  disableRemotePlayback
-                  controlsList="nodownload no-supported-media-actions noplaybackrate nofullscreen"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                  }}
-                />
-
-                {/* Badge Overlay */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '0',
-                    right: '0',
-                    backgroundColor: 'var(--tiger-red)',
-                    color: 'var(--white)',
-                    padding: '0.4rem 0.9rem',
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    fontSize: '0.82rem',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  PRODUCT DEMO • HUNTING TIGER
                 </div>
               </div>
             </div>

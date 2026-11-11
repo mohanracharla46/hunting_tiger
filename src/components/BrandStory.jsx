@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 
 export default function BrandStory() {
   return (
@@ -60,7 +59,7 @@ export default function BrandStory() {
             </p>
 
             <p style={{ fontSize: '1rem', marginBottom: '1.5rem', color: 'var(--stone-grey)' }}>
-              From high-voltage rechargeable mosquito swatters to 12-hour slow-burn coils, natural herbal agarbatti incense sticks, and the famed 3-in-1 Garuda Rekha roach chalk — every product is engineered for high efficacy, affordability, and total family safety.
+              Anti-Mosquito Agarbatti (Govt Approved formula), Rechargeable Mosquito Bats/Racquets - with Warranty, Full night Protection Coils and 3-IN-1 Cockroach Chalk - engineered for relentless Pest Protection by KSM AND CO. Vijayawada.
             </p>
 
             {/* Single Feature Card Point */}
@@ -70,11 +69,7 @@ export default function BrandStory() {
               className="flat-card"
               style={{ backgroundColor: 'var(--white)', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
-                <Sparkles size={22} color="var(--herbal-green)" />
-                <h4 style={{ fontSize: '1.05rem' }}>Herbal First</h4>
-              </div>
-              <p style={{ fontSize: '0.88rem', margin: 0 }}>Natural ingredients formula safe for kids and domestic spaces.</p>
+              <h4 style={{ fontSize: '1.05rem', margin: 0 }}>Warranty, Full-Night Protection, Friendly aroma</h4>
             </motion.div>
           </motion.div>
         </div>

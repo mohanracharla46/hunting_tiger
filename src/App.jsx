@@ -126,7 +126,6 @@ export default function App() {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <Header
         onOpenEnquiry={() => setIsDistributorModalOpen(true)}
-        onOpenAd={() => setIsAdModalOpen(true)}
       />
       
       <main style={{ flexGrow: 1 }}>
@@ -170,14 +169,13 @@ export default function App() {
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       >
         <Flame size={18} color="var(--golden-yellow)" />
-        <span>SPECIAL OFFER AD</span>
+        <span>SPECIAL OFFER</span>
       </button>
 
       {/* Auto Ad Popup Modal */}
       <AdPopupModal
         isOpen={isAdModalOpen}
         onClose={() => setIsAdModalOpen(false)}
-        onClaimOffer={() => setIsDistributorModalOpen(true)}
         onViewProducts={handleScrollToProducts}
       />
 

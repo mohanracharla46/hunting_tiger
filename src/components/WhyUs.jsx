@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, BadgeCheck, Sparkles, Timer } from 'lucide-react';
+import { Landmark, BadgeCheck, Sparkles, Timer } from 'lucide-react';
 
 export default function WhyUs() {
   const usps = [
     {
       num: '01',
-      icon: CheckCircle2,
+      icon: Landmark,
       title: 'GOVT APPROVED FORMULA',
       highlight: 'Certified Safe Formula',
       desc: 'Government-approved pest control formulation, rigorously tested and certified for safe home usage and maximum effectiveness.',
@@ -37,7 +37,7 @@ export default function WhyUs() {
     {
       num: '04',
       icon: Timer,
-      title: '12-HOUR PROTECTION',
+      title: 'FULL NIGHT PROTECTION',
       highlight: 'Uninterrupted Overnight',
       desc: 'Slow-burn coils and heavy-duty battery racquets built to deliver uninterrupted overnight pest defense.',
       borderColor: 'var(--golden-yellow)',

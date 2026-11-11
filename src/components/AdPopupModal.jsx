@@ -1,23 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, ShieldCheck, Flame, ArrowRight, Award, Zap } from 'lucide-react';
-import { IncenseIcon, MosquitoBatIcon, CockroachChalkIcon } from './CustomIcons';
+import { X, Sparkles } from 'lucide-react';
+import { AgarbattiIcon, MosquitoBatIcon, CoilIcon, CockroachChalkIcon } from './CustomIcons';
 
-export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProducts }) {
-  const [timer, setTimer] = useState(15);
-
-  useEffect(() => {
-    let interval = null;
-    if (isOpen && timer > 0) {
-      interval = setInterval(() => {
-        setTimer((prev) => (prev > 0 ? prev - 1 : 0));
-      }, 1000);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isOpen, timer]);
-
+export default function AdPopupModal({ isOpen, onClose, onViewProducts }) {
   if (!isOpen) return null;
 
   return (
@@ -50,7 +36,7 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
               onClick={onClose}
               aria-label="Close advertisement"
             >
-              <X size={22} />
+              <X size={19} />
             </button>
 
             {/* Top Announcement Bar */}
@@ -58,25 +44,27 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
               <span className="ad-live-pill">
                 <span className="ad-pulse-dot"></span> LIVE ANNOUNCEMENT
               </span>
-              <span className="ad-top-tagline">AP & TELANGANA DISTRIBUTOR NETWORK 2026</span>
+              <span className="ad-top-tagline">AP & TELANGANA DISTRIBUTOR NETWORK</span>
             </div>
 
             {/* Main Content Body */}
             <div className="ad-body">
               {/* Brand Header */}
               <div className="ad-header">
-                <div className="ad-brand-badge">
-                  <Flame size={18} className="ad-icon-red" />
-                  <span>KSM AND CO. OFFICIAL PROMO</span>
-                </div>
+                <img
+                  src="/images/logo.png"
+                  alt="Hunting Tiger"
+                  className="ad-brand-logo"
+                />
 
                 <h2 className="ad-title">
-                  PROTECT HOMES WITH <span className="ad-highlight-red">HUNTING TIGER</span>
+                  <span className="ad-title-prefix">Protect Homes with</span>
+                  <span className="ad-highlight-red">HUNTING TIGER</span>
                 </h2>
 
-                <p className="ad-subtitle">
-                  Join South India's fastest-growing mosquito defense brand. Premium Quality Agarbatti, Mosquito Racquets, Coils & Garuda Rekha Chalk!
-                </p>
+                <ul className="ad-subtitle-list">
+                  <li>Join South India's fastest-growing mosquito repellant brand.</li>
+                </ul>
               </div>
 
               {/* Offer Highlight Box */}
@@ -84,22 +72,18 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
                 <div className="ad-offer-header">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Sparkles size={20} color="var(--golden-yellow)" />
-                    <span className="ad-offer-title">EXCLUSIVE DEALER & WHOLESALE BENEFITS</span>
-                  </div>
-                  <div className="ad-timer-badge">
-                    <Zap size={14} color="#FFE066" />
-                    <span>Special Margin Season</span>
+                    <span className="ad-offer-title">WE OFFER PREMIUM PRODUCTS LIKE :</span>
                   </div>
                 </div>
 
                 <div className="ad-features-grid">
                   <div className="ad-feature-item">
                     <div className="ad-feature-icon-box">
-                      <IncenseIcon size={24} color="var(--tiger-red)" />
+                      <AgarbattiIcon size={24} color="var(--tiger-red)" />
                     </div>
                     <div>
-                      <h4>100% Herbal Agarbatti</h4>
-                      <p>Instant herbal smoke protection for family safety</p>
+                      <h4>Anti Mosquito Agarbatti</h4>
+                      <p>Instant Protection from Harmful Mosquitos.</p>
                     </div>
                   </div>
 
@@ -108,8 +92,18 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
                       <MosquitoBatIcon size={24} color="var(--tiger-red)" />
                     </div>
                     <div>
-                      <h4>Heavy Duty Racquets</h4>
-                      <p>High voltage rechargeable shock net technology</p>
+                      <h4>Heavy Duty Bats/Racquets</h4>
+                      <p>Rechargeable Mosquito Bats with warranty</p>
+                    </div>
+                  </div>
+
+                  <div className="ad-feature-item">
+                    <div className="ad-feature-icon-box">
+                      <CoilIcon size={24} color="var(--tiger-red)" />
+                    </div>
+                    <div>
+                      <h4>Mosquito Coils</h4>
+                      <p>Full night Protection</p>
                     </div>
                   </div>
 
@@ -118,51 +112,15 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
                       <CockroachChalkIcon size={24} color="var(--tiger-red)" />
                     </div>
                     <div>
-                      <h4>Garuda Rekha 3-in-1 Chalk</h4>
-                      <p>Kills Cockroaches, Ants & Bedbugs rapidly</p>
+                      <h4>3 in 1 Cockroach Chalk</h4>
+                      <p>Kills Cockroaches, Ants, and Bedbugs.</p>
                     </div>
                   </div>
-
-                  <div className="ad-feature-item">
-                    <div className="ad-feature-icon-box" style={{ background: '#FFF3C4' }}>
-                      <Award size={24} color="#D97706" />
-                    </div>
-                    <div>
-                      <h4>Maximum Dealer Margins</h4>
-                      <p>Direct factory prices & regional stockist support</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Trust Callout */}
-              <div className="ad-trust-bar">
-                <div className="ad-trust-item">
-                  <ShieldCheck size={18} color="var(--herbal-green)" />
-                  <span>Lab Tested & Safe</span>
-                </div>
-                <div className="ad-trust-divider">•</div>
-                <div className="ad-trust-item">
-                  <ShieldCheck size={18} color="var(--herbal-green)" />
-                  <span>Marketed by KSM AND CO., Vijayawada</span>
                 </div>
               </div>
 
               {/* Actions */}
               <div className="ad-actions">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => {
-                    onClose();
-                    onClaimOffer();
-                  }}
-                  className="btn btn-primary ad-btn-main"
-                >
-                  <span>BECOME A DISTRIBUTOR NOW</span>
-                  <ArrowRight size={20} />
-                </motion.button>
-
                 <button
                   onClick={() => {
                     onClose();
@@ -203,13 +161,13 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
 
         .ad-modal-close-btn {
           position: absolute;
-          top: 0.75rem;
-          right: 0.75rem;
-          width: 36px;
-          height: 36px;
+          top: 0.35rem;
+          right: 0.6rem;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
-          background: rgba(0, 0, 0, 0.4);
-          border: none;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.18);
           color: #FFFFFF;
           display: flex;
           align-items: center;
@@ -221,16 +179,18 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
 
         .ad-modal-close-btn:hover {
           background: var(--tiger-red);
+          border-color: var(--tiger-red);
           transform: rotate(90deg);
         }
 
         .ad-top-banner {
           background: var(--charcoal);
           color: #FFFFFF;
-          padding: 0.6rem 1.25rem;
+          min-height: 44px;
+          padding: 0.6rem 3.1rem 0.6rem 1.25rem;
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.9rem;
           font-family: var(--font-display);
           font-size: 0.85rem;
           letter-spacing: 0.05em;
@@ -247,6 +207,7 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
           gap: 0.4rem;
           font-size: 0.75rem;
           text-transform: uppercase;
+          flex-shrink: 0;
         }
 
         .ad-pulse-dot {
@@ -272,48 +233,70 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
         }
 
         .ad-body {
-          padding: 1.75rem;
+          padding: 1.5rem 1.75rem 1.65rem;
           background: linear-gradient(180deg, #FFFFFF 0%, #F7F4EE 100%);
         }
 
         .ad-header {
           text-align: center;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.2rem;
         }
 
-        .ad-brand-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          background: #FEE2E2;
-          color: var(--tiger-red);
-          font-family: var(--font-display);
-          font-weight: 700;
-          font-size: 0.8rem;
-          padding: 0.25rem 0.75rem;
-          border-radius: 20px;
-          margin-bottom: 0.75rem;
-          letter-spacing: 0.05em;
+        .ad-brand-logo {
+          height: 58px;
+          width: auto;
+          object-fit: contain;
+          margin: 0 auto 0.6rem;
+          display: block;
         }
 
         .ad-title {
-          font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          flex-wrap: nowrap;
+          gap: 0.42rem;
+          white-space: nowrap;
+          word-break: keep-all;
+          text-transform: none;
+          margin-bottom: 0.45rem;
+          line-height: 1.15;
+        }
+
+        .ad-title-prefix {
+          font-family: 'Plus Jakarta Sans', var(--font-body);
+          font-size: clamp(0.86rem, 3.1vw, 1.32rem);
+          font-weight: 600;
           color: var(--charcoal);
-          margin-bottom: 0.4rem;
-          line-height: 1.1;
+          letter-spacing: -0.015em;
+          text-transform: none;
         }
 
         .ad-highlight-red {
+          font-family: var(--font-display);
+          font-size: clamp(1.12rem, 4.2vw, 1.95rem);
+          font-weight: 700;
           color: var(--tiger-red);
+          text-transform: uppercase;
+          letter-spacing: 0.03em;
           position: relative;
         }
 
-        .ad-subtitle {
-          font-size: 0.95rem;
+        .ad-subtitle-list {
+          list-style: disc;
+          list-style-position: inside;
+          margin: 0.25rem auto 0;
+          padding: 0;
+          text-align: center;
+          font-size: 0.94rem;
           color: var(--stone-grey);
           max-width: 520px;
-          margin: 0 auto;
-          line-height: 1.4;
+          line-height: 1.45;
+        }
+
+        .ad-subtitle-list li::marker {
+          color: var(--tiger-red);
+          font-size: 1.05em;
         }
 
         .ad-offer-card {
@@ -328,7 +311,7 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
         .ad-offer-header {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
           border-bottom: 1px solid #E5E0D4;
           padding-bottom: 0.75rem;
           margin-bottom: 1rem;
@@ -342,18 +325,7 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
           font-weight: 700;
           color: var(--charcoal);
           letter-spacing: 0.03em;
-        }
-
-        .ad-timer-badge {
-          background: var(--charcoal);
-          color: #FFFFFF;
-          font-size: 0.75rem;
-          font-family: var(--font-display);
-          padding: 0.2rem 0.6rem;
-          border-radius: 4px;
-          display: flex;
-          align-items: center;
-          gap: 0.3rem;
+          text-transform: uppercase;
         }
 
         .ad-features-grid {
@@ -392,41 +364,15 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
           line-height: 1.25;
         }
 
-        .ad-trust-bar {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.75rem;
-          margin-bottom: 1.25rem;
-          font-size: 0.85rem;
-          color: var(--charcoal);
-          font-weight: 600;
-          flex-wrap: wrap;
-        }
-
-        .ad-trust-item {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-        }
-
-        .ad-trust-divider {
-          color: var(--tiger-red);
-        }
-
         .ad-actions {
           display: flex;
-          gap: 0.75rem;
+          justify-content: center;
           margin-bottom: 0.75rem;
         }
 
-        .ad-btn-main {
-          flex: 1.6;
-          box-shadow: 0 4px 15px rgba(227, 30, 36, 0.3);
-        }
-
         .ad-btn-sec {
-          flex: 1;
+          width: 100%;
+          max-width: 320px;
         }
 
         .ad-footer-note {
@@ -449,17 +395,29 @@ export default function AdPopupModal({ isOpen, onClose, onClaimOffer, onViewProd
 
         @media (max-width: 600px) {
           .ad-body {
-            padding: 1.25rem;
+            padding: 1.2rem;
           }
           .ad-features-grid {
             grid-template-columns: 1fr;
             gap: 0.85rem;
           }
-          .ad-actions {
-            flex-direction: column;
+          .ad-btn-sec {
+            max-width: 100%;
           }
           .ad-top-banner {
             font-size: 0.75rem;
+            min-height: 40px;
+            padding: 0.5rem 2.8rem 0.5rem 0.9rem;
+            gap: 0.6rem;
+          }
+          .ad-modal-close-btn {
+            top: 0.28rem;
+            right: 0.5rem;
+            width: 30px;
+            height: 30px;
+          }
+          .ad-brand-logo {
+            height: 50px;
           }
         }
       `}</style>

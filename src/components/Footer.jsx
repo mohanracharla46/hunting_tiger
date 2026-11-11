@@ -1,5 +1,7 @@
 import React from 'react';
 import { Phone, Mail, Share2, Globe, MessageSquare } from 'lucide-react';
+import { WhatsappIcon } from './CustomIcons';
+import BrandLogos from './BrandLogos';
 
 export default function Footer() {
   return (
@@ -16,28 +18,38 @@ export default function Footer() {
         >
           {/* Brand Col */}
           <div>
-            <a href="#" style={{ display: 'inline-block', textDecoration: 'none', marginBottom: '1.25rem' }}>
-              <img
-                src="/images/logo.png"
-                alt="Hunting Tiger - KSM AND CO. Vijayawada"
-                style={{
-                  height: '52px',
-                  width: 'auto',
-                  objectFit: 'contain',
-                  display: 'block',
-                  backgroundColor: 'var(--white)',
-                  padding: '0.35rem 0.75rem',
-                  borderRadius: '2px',
-                }}
-              />
-            </a>
+            <BrandLogos style={{ marginBottom: '1.25rem', padding: '0.35rem 0.75rem' }} />
             <p style={{ fontSize: '0.9rem', color: '#A0A09A', lineHeight: 1.6, marginBottom: '1.5rem' }}>
               Heavy-duty household pest protection products. From electric mosquito swatter racquets to 12-hour protection coils, herbal incense sticks, and 3-in-1 Garuda Rekha roach chalk.
             </p>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+              <a
+                href="https://wa.me/917842338899"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp Contact"
+                style={{
+                  backgroundColor: '#25D366',
+                  color: 'var(--white)',
+                  padding: '0.6rem 0.85rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  borderRadius: '3px',
+                  fontWeight: 600,
+                  fontSize: '0.85rem',
+                  textDecoration: 'none',
+                  transition: 'opacity 0.2s ease',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+              >
+                <WhatsappIcon size={18} color="#FFFFFF" />
+                <span>WhatsApp</span>
+              </a>
               <a
                 href="#"
-                aria-label="Share"
+                aria-label="Website"
                 style={{
                   backgroundColor: '#2A2A2A',
                   color: 'var(--white)',
@@ -132,8 +144,18 @@ export default function Footer() {
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                 <Phone size={16} color="var(--tiger-red)" style={{ flexShrink: 0, marginTop: '3px' }} />
                 <div>
-                  <div><strong>K V R Murthy:</strong> +91 7842338899</div>
-                  <div><strong>K Prem Chandra:</strong> +91 9010137013</div>
+                  <div>
+                    <strong>K V R Murthy:</strong>{' '}
+                    <a href="https://wa.me/917842338899" target="_blank" rel="noopener noreferrer" style={{ color: '#25D366', textDecoration: 'none' }}>
+                      +91 7842338899 <WhatsappIcon size={14} color="#25D366" />
+                    </a>
+                  </div>
+                  <div>
+                    <strong>K Prem Chandra:</strong>{' '}
+                    <a href="https://wa.me/919010137013" target="_blank" rel="noopener noreferrer" style={{ color: '#25D366', textDecoration: 'none' }}>
+                      +91 9010137013 <WhatsappIcon size={14} color="#25D366" />
+                    </a>
+                  </div>
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
