@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Check } from 'lucide-react';
-import { IncenseIcon, MosquitoBatIcon, CoilIcon, CockroachChalkIcon } from './CustomIcons';
+import { AgarbattiIcon, MosquitoBatIcon, CoilIcon, CockroachChalkIcon } from './CustomIcons';
 
 export default function ProductShowcase({ onSelectProduct }) {
   const [activeCategory, setActiveCategory] = useState('incense');
 
   const categories = [
-    { id: 'incense', prefix: '', label: 'Anti Mosquito Agarbatti', icon: IncenseIcon },
+    { id: 'incense', prefix: '', label: 'Anti Mosquito Agarbatti', icon: AgarbattiIcon },
     { id: 'bats', prefix: '', label: 'Mosquito Bats & Racquets', icon: MosquitoBatIcon },
     { id: 'coils', prefix: '', label: 'Mosquito Coils', icon: CoilIcon },
     { id: 'chalk', prefix: '', label: '3-in-1 Cockroach Chalk', icon: CockroachChalkIcon },

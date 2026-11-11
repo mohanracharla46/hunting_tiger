@@ -23,6 +23,23 @@ export default function Hero({ onOpenEnquiry }) {
     },
   };
 
+  const heroVideos = [
+    {
+      src: '/videos/hero.mp4',
+      badge: 'FLAGSHIP COMMERCIAL • KSM AND CO.',
+      badgeBg: 'var(--golden-yellow)',
+      badgeColor: 'var(--charcoal)',
+      delay: 0.2,
+    },
+    {
+      src: '/videos/hero2.mp4',
+      badge: 'BRAND COMMERCIAL • TIDY TOUCH',
+      badgeBg: 'var(--tiger-red)',
+      badgeColor: 'var(--white)',
+      delay: 0.35,
+    },
+  ];
+
   return (
     <section
       style={{
@@ -187,72 +204,82 @@ export default function Hero({ onOpenEnquiry }) {
             </motion.div>
           </motion.div>
 
-          {/* Right Video Showcase */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' }}
+          {/* Right Dual Video Showcase */}
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
           >
             <div
               style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.25rem',
                 width: '100%',
-                maxWidth: '480px',
+                maxWidth: '520px',
               }}
             >
-              {/* Single Video Showcase */}
-              <div
-                style={{
-                  backgroundColor: 'var(--charcoal)',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
-                  position: 'relative',
-                  width: '100%',
-                  aspectRatio: '1 / 1',
-                  overflow: 'hidden',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                }}
-              >
-                {/* Clean Video Player */}
-                <video
-                  src="/videos/hero.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  disablePictureInPicture
-                  disableRemotePlayback
-                  controlsList="nodownload no-supported-media-actions noplaybackrate nofullscreen"
+              {heroVideos.map((video) => (
+                <motion.div
+                  key={video.src}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: video.delay }}
                   style={{
+                    backgroundColor: 'var(--charcoal)',
+                    boxShadow: '0 15px 30px rgba(0,0,0,0.4)',
+                    position: 'relative',
                     width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                  }}
-                />
-
-                {/* Badge Overlay */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '0',
-                    right: '0',
-                    backgroundColor: 'var(--golden-yellow)',
-                    color: 'var(--charcoal)',
-                    padding: '0.4rem 0.9rem',
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    fontSize: '0.82rem',
-                    letterSpacing: '0.05em',
+                    aspectRatio: '16 / 9',
+                    overflow: 'hidden',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
                   }}
                 >
-                  FLAGSHIP COMMERCIAL • KSM AND CO.
-                </div>
-              </div>
+                  {/* Clean Video Player */}
+                  <video
+                    src={video.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    controlsList="nodownload no-supported-media-actions noplaybackrate nofullscreen"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                    }}
+                  />
+
+                  {/* Badge Overlay */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '0',
+                      right: '0',
+                      backgroundColor: video.badgeBg,
+                      color: video.badgeColor,
+                      padding: '0.4rem 0.9rem',
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 700,
+                      fontSize: '0.82rem',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    {video.badge}
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
