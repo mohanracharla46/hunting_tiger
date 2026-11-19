@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Landmark, BadgeCheck, Sparkles, Timer } from 'lucide-react';
+import { Landmark, BadgeCheck, Timer } from 'lucide-react';
 
 export default function WhyUs() {
   const usps = [
@@ -26,16 +26,6 @@ export default function WhyUs() {
     },
     {
       num: '03',
-      icon: Sparkles,
-      title: 'HERBAL INGREDIENTS',
-      highlight: '100% Botanical Blend',
-      desc: 'Formulated with natural botanical extracts, neem, and ayurvedic repellent oils safe for homes with children.',
-      borderColor: '#4EBA4E',
-      iconColor: '#4EBA4E',
-      iconBg: 'rgba(78, 186, 78, 0.15)',
-    },
-    {
-      num: '04',
       icon: Timer,
       title: 'FULL NIGHT PROTECTION',
       highlight: 'Uninterrupted Overnight',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles } from 'lucide-react';
+import { X, Sparkles, ShieldCheck } from 'lucide-react';
 import { AgarbattiIcon, MosquitoBatIcon, CoilIcon, CockroachChalkIcon } from './CustomIcons';
 
 export default function AdPopupModal({ isOpen, onClose, onViewProducts }) {
@@ -61,6 +61,11 @@ export default function AdPopupModal({ isOpen, onClose, onViewProducts }) {
                   <span className="ad-title-prefix">Protect Homes with</span>
                   <span className="ad-highlight-red">HUNTING TIGER</span>
                 </h2>
+
+                <div className="ad-marketed-tag">
+                  <ShieldCheck size={18} color="var(--herbal-green)" strokeWidth={2.4} />
+                  <span>Marketed by KSM AND CO.,</span>
+                </div>
 
                 <ul className="ad-subtitle-list">
                   <li>Join South India's fastest-growing mosquito repellant brand.</li>
@@ -280,6 +285,23 @@ export default function AdPopupModal({ isOpen, onClose, onViewProducts }) {
           text-transform: uppercase;
           letter-spacing: 0.03em;
           position: relative;
+        }
+
+        .ad-marketed-tag {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.45rem;
+          margin: 0.25rem auto 0.45rem;
+          font-family: var(--font-body);
+          font-size: clamp(0.85rem, 2.6vw, 0.95rem);
+          font-weight: 700;
+          color: var(--charcoal);
+          letter-spacing: -0.01em;
+        }
+
+        .ad-marketed-tag svg {
+          flex-shrink: 0;
         }
 
         .ad-subtitle-list {

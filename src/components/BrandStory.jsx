@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ShieldCheck, Timer, Sparkles } from 'lucide-react';
 
 export default function BrandStory() {
   return (
@@ -62,15 +63,160 @@ export default function BrandStory() {
               Anti-Mosquito Agarbatti (Govt Approved formula), Rechargeable Mosquito Bats/Racquets - with Warranty, Full night Protection Coils and 3-IN-1 Cockroach Chalk - engineered for relentless Pest Protection by KSM AND CO. Vijayawada.
             </p>
 
-            {/* Single Feature Card Point */}
-            <motion.div
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.2 }}
-              className="flat-card"
-              style={{ backgroundColor: 'var(--white)', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}
+            {/* Feature Cards Grid */}
+            <div
+              className="story-feature-cards"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '0.85rem',
+                marginTop: '1.5rem',
+              }}
             >
-              <h4 style={{ fontSize: '1.05rem', margin: 0 }}>Warranty, Full-Night Protection, Friendly aroma</h4>
-            </motion.div>
+              <motion.div
+                whileHover={{ y: -4, boxShadow: '0 8px 20px rgba(0,0,0,0.08)' }}
+                transition={{ duration: 0.2 }}
+                className="flat-card story-card"
+                style={{
+                  backgroundColor: 'var(--white)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                  padding: '1.1rem 0.85rem',
+                  borderRadius: '6px',
+                  borderTop: '3px solid var(--tiger-red)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  gap: '0.45rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(227, 30, 36, 0.1)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '0.2rem',
+                  }}
+                >
+                  <ShieldCheck size={22} color="var(--tiger-red)" />
+                </div>
+                <h4
+                  style={{
+                    fontSize: '0.95rem',
+                    margin: 0,
+                    color: 'var(--charcoal)',
+                    fontFamily: 'var(--font-display)',
+                    letterSpacing: '0.02em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Warranty
+                </h4>
+                <p style={{ fontSize: '0.78rem', color: 'var(--stone-grey)', margin: 0, lineHeight: 1.35 }}>
+                  Guaranteed warranty on rechargeable bats
+                </p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -4, boxShadow: '0 8px 20px rgba(0,0,0,0.08)' }}
+                transition={{ duration: 0.2 }}
+                className="flat-card story-card"
+                style={{
+                  backgroundColor: 'var(--white)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                  padding: '1.1rem 0.85rem',
+                  borderRadius: '6px',
+                  borderTop: '3px solid var(--golden-yellow)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  gap: '0.45rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(245, 166, 35, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '0.2rem',
+                  }}
+                >
+                  <Timer size={22} color="var(--golden-yellow)" />
+                </div>
+                <h4
+                  style={{
+                    fontSize: '0.95rem',
+                    margin: 0,
+                    color: 'var(--charcoal)',
+                    fontFamily: 'var(--font-display)',
+                    letterSpacing: '0.02em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Full-Night Protection
+                </h4>
+                <p style={{ fontSize: '0.78rem', color: 'var(--stone-grey)', margin: 0, lineHeight: 1.35 }}>
+                  12-hour continuous slow-burn shield
+                </p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -4, boxShadow: '0 8px 20px rgba(0,0,0,0.08)' }}
+                transition={{ duration: 0.2 }}
+                className="flat-card story-card"
+                style={{
+                  backgroundColor: 'var(--white)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                  padding: '1.1rem 0.85rem',
+                  borderRadius: '6px',
+                  borderTop: '3px solid var(--herbal-green)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  gap: '0.45rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(47, 107, 47, 0.12)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '0.2rem',
+                  }}
+                >
+                  <Sparkles size={22} color="var(--herbal-green)" />
+                </div>
+                <h4
+                  style={{
+                    fontSize: '0.95rem',
+                    margin: 0,
+                    color: 'var(--charcoal)',
+                    fontFamily: 'var(--font-display)',
+                    letterSpacing: '0.02em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Friendly Aroma
+                </h4>
+                <p style={{ fontSize: '0.78rem', color: 'var(--stone-grey)', margin: 0, lineHeight: 1.35 }}>
+                  Pleasant herbal soothing fragrance
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -78,6 +224,9 @@ export default function BrandStory() {
       <style>{`
         @media (max-width: 900px) {
           .story-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+        }
+        @media (max-width: 600px) {
+          .story-feature-cards { grid-template-columns: 1fr !important; gap: 0.75rem !important; }
         }
       `}</style>
     </section>
