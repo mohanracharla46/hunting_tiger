@@ -216,6 +216,18 @@ export default function ProductShowcase({ onSelectProduct }) {
   const productsData = {
     bats: [
       {
+        id: 'bat-boxed',
+        name: 'Hunting Tiger Anti-Mosquito Racquet Set',
+        mrp: '₹599.00',
+        warranty: '1 Year Warranty',
+        benefit: 'Retail box set including FREE 2 pcs Herbal Incense Sticks & heavy battery.',
+        specs: ['1 Year Full Warranty', 'FREE 2 Pcs Herbal Incense', 'Heavy-Duty Battery'],
+        image: '/images/image6.png',
+        badge: 'FREE GIFT PACK',
+        color: 'var(--deep-navy)',
+        textColor: 'var(--cream)',
+      },
+      {
         id: 'bat-ht500',
         name: 'Hunting Tiger Rechargeable Bat (Model HT500)',
         mrp: '₹595.00',
@@ -224,7 +236,7 @@ export default function ProductShowcase({ onSelectProduct }) {
         specs: ['Model No. HT500', '6 Months Warranty', '8 Hours Recharge • ISO 9001:2015'],
         image: '/images/mosquito-bat-ht500.png',
         badge: '6 MONTHS WARRANTY',
-        color: 'var(--deep-navy)',
+        color: 'var(--charcoal)',
         textColor: 'var(--cream)',
       },
       {
@@ -236,7 +248,7 @@ export default function ProductShowcase({ onSelectProduct }) {
         specs: ['Model No. HT-222', '6 Months Warranty', '8 Hours Charge • ISO 9001:2015'],
         image: '/images/mosquito-bat-ht222.png',
         badge: '6 MONTHS WARRANTY',
-        color: 'var(--charcoal)',
+        color: 'var(--deep-navy)',
         textColor: 'var(--cream)',
       },
       {
@@ -248,7 +260,7 @@ export default function ProductShowcase({ onSelectProduct }) {
         specs: ['Model No. HT-111', '3 Months Warranty', '8 Hours Recharge • ISO 9001:2015'],
         image: '/images/mosquito-bat-ht111.png',
         badge: '3 MONTHS WARRANTY',
-        color: 'var(--deep-navy)',
+        color: 'var(--charcoal)',
         textColor: 'var(--cream)',
       },
     ],
