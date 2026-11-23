@@ -3,6 +3,206 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Check } from 'lucide-react';
 import { AgarbattiIcon, MosquitoBatIcon, CoilIcon, CockroachChalkIcon } from './CustomIcons';
 
+function ProductCard({ prod, isSingle, onSelectProduct }) {
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+
+  const current = prod.variants ? prod.variants[selectedVariantIndex] : prod;
+  const currentBadge = current.badge || prod.badge;
+  const currentWarranty = current.warranty || prod.warranty;
+  const currentStat = current.stat || prod.stat;
+  const currentName = current.name || prod.name;
+  const currentMrp = current.mrp || prod.mrp;
+  const currentBenefit = current.benefit || prod.benefit;
+  const currentSpecs = current.specs || prod.specs;
+  const currentImage = current.image || prod.image;
+  const currentColor = current.color || prod.color;
+  const currentTextColor = current.textColor || prod.textColor;
+
+  return (
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.2 }}
+      style={{
+        backgroundColor: currentColor,
+        color: currentTextColor,
+        borderRadius: '6px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        position: 'relative',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+        overflow: 'hidden',
+        width: '100%',
+      }}
+    >
+      {/* Card Top Header / Badge */}
+      <div
+        style={{
+          backgroundColor: 'rgba(0,0,0,0.25)',
+          padding: '0.85rem 1.4rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <span className="flat-badge badge-yellow">{currentBadge}</span>
+        {currentWarranty && (
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              color: 'var(--golden-yellow)',
+            }}
+          >
+            {currentWarranty}
+          </span>
+        )}
+        {currentStat && (
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: '0.9rem',
+              fontWeight: 700,
+              color: 'var(--golden-yellow)',
+            }}
+          >
+            {currentStat}
+          </span>
+        )}
+      </div>
+
+      {/* Body: Split 2-col on laptop for single-product view, vertical stack otherwise */}
+      <div className={`product-card-body ${isSingle ? 'product-card-body-split' : ''}`}>
+        {/* Product Media (One side in laptop view) */}
+        <div
+          className="product-media-container"
+          style={{
+            padding: isSingle ? '2rem 1.5rem' : '1.25rem',
+            textAlign: 'center',
+            backgroundColor: 'var(--white)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <motion.img
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+            src={currentImage}
+            alt={currentName}
+            style={{
+              maxHeight: isSingle ? '380px' : '340px',
+              width: '100%',
+              margin: '0 auto',
+              objectFit: 'contain',
+            }}
+          />
+        </div>
+
+        {/* Product Content (One side in laptop view) */}
+        <div
+          className="product-content-container"
+          style={{
+            padding: isSingle ? '2rem 2.25rem' : '1.5rem',
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
+          <div>
+            {/* Price & Pack Selector Options if variants exist */}
+            {prod.variants && prod.variants.length > 1 && (
+              <div style={{ marginBottom: '1.2rem' }}>
+                <div
+                  style={{
+                    fontSize: '0.78rem',
+                    fontFamily: 'var(--font-display)',
+                    color: 'var(--golden-yellow)',
+                    fontWeight: 700,
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  SELECT PACK / PRICE:
+                </div>
+                <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
+                  {prod.variants.map((v, vIdx) => {
+                    const isSelected = vIdx === selectedVariantIndex;
+                    return (
+                      <button
+                        key={v.id}
+                        type="button"
+                        onClick={() => setSelectedVariantIndex(vIdx)}
+                        style={{
+                          padding: '0.5rem 0.95rem',
+                          borderRadius: '4px',
+                          border: isSelected ? '2px solid var(--golden-yellow)' : '1px solid rgba(255, 255, 255, 0.25)',
+                          backgroundColor: isSelected ? 'var(--golden-yellow)' : 'rgba(255, 255, 255, 0.08)',
+                          color: isSelected ? 'var(--charcoal)' : 'var(--cream)',
+                          fontFamily: 'var(--font-display)',
+                          fontSize: '0.88rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.03em',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          boxShadow: isSelected ? '0 2px 8px rgba(245, 166, 35, 0.35)' : 'none',
+                        }}
+                      >
+                        {v.optionLabel || v.mrp}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.6rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <h3 style={{ fontSize: isSingle ? '1.5rem' : '1.35rem', color: currentTextColor, margin: 0 }}>{currentName}</h3>
+              <div
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: isSingle ? '1.6rem' : '1.4rem',
+                  fontWeight: 700,
+                  color: 'var(--golden-yellow)',
+                  flexShrink: 0,
+                }}
+              >
+                {currentMrp}
+              </div>
+            </div>
+
+            <p style={{ fontSize: '0.98rem', color: currentTextColor, opacity: 0.9, marginBottom: '1.25rem', lineHeight: 1.5 }}>
+              {currentBenefit}
+            </p>
+
+            <div style={{ paddingTop: '0.25rem', marginBottom: '1.75rem' }}>
+              {currentSpecs.map((sp, idx) => (
+                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.88rem', marginBottom: '0.4rem' }}>
+                  <Check size={16} color="var(--golden-yellow)" />
+                  <span>{sp}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="btn btn-primary"
+            style={{ width: '100%', padding: '0.9rem' }}
+            onClick={() => onSelectProduct({ ...prod, ...current })}
+          >
+            <ShoppingBag size={18} /> Request Dealer Quote
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ProductShowcase({ onSelectProduct }) {
   const [activeCategory, setActiveCategory] = useState('incense');
 
@@ -15,42 +215,6 @@ export default function ProductShowcase({ onSelectProduct }) {
 
   const productsData = {
     bats: [
-      {
-        id: 'bat-std',
-        name: 'Hunting Tiger Rechargeable Bat (Model CB100)',
-        mrp: '₹395.00',
-        warranty: '3 Months Warranty',
-        benefit: 'Heavy-duty ABS chassis, high-voltage mesh & 8-hour rechargeable battery.',
-        specs: ['Model No. CB100', '8 Hours Recharge', 'ISO 9001:2015 Certified'],
-        image: '/images/image5.png',
-        badge: 'POPULAR MODEL',
-        color: 'var(--charcoal)',
-        textColor: 'var(--cream)',
-      },
-      {
-        id: 'bat-boxed',
-        name: 'Hunting Tiger Anti-Mosquito Racquet Set',
-        mrp: '₹599.00',
-        warranty: '1 Year Warranty',
-        benefit: 'Retail box set including FREE 2 pcs Herbal Incense Sticks & heavy battery.',
-        specs: ['1 Year Full Warranty', 'FREE 2 Pcs Herbal Incense', 'Heavy-Duty Battery'],
-        image: '/images/image6.png',
-        badge: 'FREE GIFT PACK',
-        color: 'var(--deep-navy)',
-        textColor: 'var(--cream)',
-      },
-      {
-        id: 'bat-lineup',
-        name: 'Hunting Tiger Multi-Mesh Racket Series',
-        mrp: '₹395 - ₹599',
-        warranty: 'ISO Certified',
-        benefit: 'Available in Black, Pink, and Yellow heavy-duty safety mesh variants.',
-        specs: ['Triple Mesh Protection', 'Ergonomic Grip', 'Instant Zapping'],
-        image: '/images/image9.png',
-        badge: 'FULL COLOR RANGE',
-        color: 'var(--charcoal)',
-        textColor: 'var(--cream)',
-      },
       {
         id: 'bat-ht500',
         name: 'Hunting Tiger Rechargeable Bat (Model HT500)',
@@ -90,84 +254,45 @@ export default function ProductShowcase({ onSelectProduct }) {
     ],
     coils: [
       {
-        id: 'coil-10-4',
-        name: 'Hunting Tiger 10+4 FREE Mosquito Coils',
-        mrp: '₹40.00',
-        stat: '12 HOURS PROTECTION',
-        benefit: '14 Heavy-duty red coils + metal stand clips in signature blue & orange box.',
-        specs: ['Coils - 10+4 Free Promo', '12 Hours Protection', 'Slow Smoke Diffusion'],
+        id: 'mosquito-coils',
+        name: 'Hunting Tiger Mosquito Coils',
         image: '/images/mosquito-coils.png',
-        badge: '10 + 4 FREE PROMO',
         color: 'var(--deep-navy)',
         textColor: 'var(--cream)',
-      },
-      {
-        id: 'coil-30',
-        name: 'Hunting Tiger 30-Coil Power Booster',
-        mrp: '₹99.00',
-        stat: '12 HOURS PROTECTION',
-        benefit: 'Bulk 30-coil power booster display box for 12-hour bedroom & patio defense.',
-        specs: ['Coils - 30 Power Booster', '12 Hours Protection', 'Wind Resistant Formula'],
-        image: '/images/mosquito-coils.png',
-        badge: '30 COILS BOOSTER',
-        color: 'var(--charcoal)',
-        textColor: 'var(--cream)',
+        variants: [
+          {
+            id: 'coil-10-4',
+            name: 'Hunting Tiger 10+4 FREE Mosquito Coils',
+            mrp: '₹40.00',
+            optionLabel: '₹40.00 (10+4 Coils)',
+            badge: '10 + 4 FREE PROMO',
+            stat: '12 HOURS PROTECTION',
+            benefit: '14 Heavy-duty red coils + metal stand clips in signature blue & orange box.',
+            specs: ['Coils - 10+4 Free Promo', '12 Hours Protection', 'Slow Smoke Diffusion'],
+          },
+          {
+            id: 'coil-30',
+            name: 'Hunting Tiger 30-Coil Power Booster',
+            mrp: '₹99.00',
+            optionLabel: '₹99.00 (30 Coils)',
+            badge: '30 COILS BOOSTER',
+            stat: '12 HOURS PROTECTION',
+            benefit: 'Bulk 30-coil power booster display box for 12-hour bedroom & patio defense.',
+            specs: ['Coils - 30 Power Booster', '12 Hours Protection', 'Wind Resistant Formula'],
+          },
+        ],
       },
     ],
     incense: [
-      {
-        id: 'incense-range-1',
-        name: 'Hunting Tiger Herbal Agarbatti Range',
-        mrp: '₹5 / ₹10 / ₹15',
-        badge: 'HERBAL COLLECTION',
-        benefit: 'Natural herbal agarbatti sticks available in ₹5 (5 Sticks), ₹10 (10 Sticks), and ₹15 packs.',
-        specs: ['Made with Herbal Ingredients', '0% Synthetic Chemicals', 'Spreads Pleasant Environment'],
-        image: '/images/image2.png',
-        color: 'var(--herbal-green)',
-        textColor: 'var(--cream)',
-      },
-      {
-        id: 'incense-range-2',
-        name: 'Hunting Tiger Neem & Jasmine Agarbatti',
-        mrp: '₹15.00',
-        badge: 'NEEM & JASMINE',
-        benefit: 'Premium ₹15 agarbatti pack enriched with added Neem Herbal & Jasmine Fragrance.',
-        specs: ['Added Neem Herbal', 'Real Jasmine Fragrance', 'Long 10 Sticks Pack'],
-        image: '/images/image3.png',
-        color: 'var(--herbal-green)',
-        textColor: 'var(--cream)',
-      },
-      {
-        id: 'garuda-incense-box',
-        name: 'Garuda Rekha Herbal Incense Box',
-        mrp: '₹15.00',
-        badge: 'GARUDA EDITION',
-        benefit: 'Speciality ₹15 herbal agarbatti box with Garuda wings logo formula.',
-        specs: ['Sticks - 10, Strips - 12', 'Natural Repellent Formula', 'Ayurvedic Botanical Blend'],
-        image: '/images/image4.png',
-        color: 'var(--charcoal)',
-        textColor: 'var(--cream)',
-      },
       {
         id: 'anti-mosquito-agarbatti',
         name: 'Hunting Tiger Anti-Mosquito Agarbatti',
         mrp: '₹5 / ₹130',
         badge: 'GOVT APPROVED FORMULA',
-        benefit: 'Government-approved anti-mosquito agarbatti available in 4 Sticks (MRP ₹5) and 26 Sticks Box (MRP ₹130).',
-        specs: ['Sticks 4 — MRP: ₹5', 'Sticks 26 — MRP: ₹130', 'Government Approved Formula'],
+        benefit: 'Government-approved anti-mosquito agarbatti available in 4 Sticks (MRP ₹5) and 26 Strips Box (MRP ₹130).',
+        specs: ['Sticks 4 — MRP: ₹5', 'Strips 26 — MRP: ₹130', 'Government Approved Formula'],
         image: '/images/anti-mosquito-agarbatti.jpg',
         color: 'var(--herbal-green)',
-        textColor: 'var(--cream)',
-      },
-      {
-        id: 'anti-mosquito-agarbatti-20',
-        name: 'Hunting Tiger Anti-Mosquito Agarbatti (₹20 Pack)',
-        mrp: '₹20 / ₹300',
-        badge: 'GOVT APPROVED FORMULA',
-        benefit: 'Government-approved anti-mosquito agarbatti available in 10 Sticks (MRP ₹20.00) and 15 Strips Box (MRP ₹300.00).',
-        specs: ['Sticks 10 — MRP: ₹20.00', 'Strips 15 — MRP: ₹300.00', 'Government Approved Formula'],
-        image: '/images/anti-mosquito-agarbatti-20.png',
-        color: 'var(--charcoal)',
         textColor: 'var(--cream)',
       },
       {
@@ -179,6 +304,17 @@ export default function ProductShowcase({ onSelectProduct }) {
         specs: ['Sticks 9 — MRP: ₹10.00', 'Strips 13 — MRP: ₹130.00', 'Government Approved Formula'],
         image: '/images/anti-mosquito-agarbatti-10.png',
         color: 'var(--deep-navy)',
+        textColor: 'var(--cream)',
+      },
+      {
+        id: 'anti-mosquito-agarbatti-20',
+        name: 'Hunting Tiger Anti-Mosquito Agarbatti (₹20 Pack)',
+        mrp: '₹20 / ₹300',
+        badge: 'GOVT APPROVED FORMULA',
+        benefit: 'Government-approved anti-mosquito agarbatti available in 10 Sticks (MRP ₹20.00) and 15 Strips Box (MRP ₹300.00).',
+        specs: ['Sticks 10 — MRP: ₹20.00', 'Strips 15 — MRP: ₹300.00', 'Government Approved Formula'],
+        image: '/images/anti-mosquito-agarbatti-20.png',
+        color: 'var(--charcoal)',
         textColor: 'var(--cream)',
       },
     ],
@@ -276,130 +412,41 @@ export default function ProductShowcase({ onSelectProduct }) {
             transition={{ duration: 0.25 }}
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
+              gridTemplateColumns: productsData[activeCategory].length === 1 ? '1fr' : 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
               gap: '2rem',
+              maxWidth: productsData[activeCategory].length === 1 ? '960px' : 'none',
+              margin: productsData[activeCategory].length === 1 ? '0 auto' : '0',
+              width: '100%',
             }}
           >
             {productsData[activeCategory].map((prod) => (
-              <motion.div
+              <ProductCard
                 key={prod.id}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.2 }}
-                style={{
-                  backgroundColor: prod.color,
-                  color: prod.textColor,
-                  borderRadius: '4px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  position: 'relative',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-                  overflow: 'hidden',
-                }}
-              >
-                {/* Card Top Header / Badge */}
-                <div
-                  style={{
-                    backgroundColor: 'rgba(0,0,0,0.2)',
-                    padding: '0.75rem 1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span className="flat-badge badge-yellow">{prod.badge}</span>
-                  {prod.warranty && (
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        color: 'var(--golden-yellow)',
-                      }}
-                    >
-                      {prod.warranty}
-                    </span>
-                  )}
-                  {prod.stat && (
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '0.9rem',
-                        fontWeight: 700,
-                        color: 'var(--golden-yellow)',
-                      }}
-                    >
-                      {prod.stat}
-                    </span>
-                  )}
-                </div>
-
-                {/* Product Media */}
-                <div style={{ padding: '1.25rem', textAlign: 'center', backgroundColor: 'var(--white)' }}>
-                  <motion.img
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.2 }}
-                    src={prod.image}
-                    alt={prod.name}
-                    style={{
-                      maxHeight: '340px',
-                      width: '100%',
-                      margin: '0 auto',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </div>
-
-                {/* Product Content */}
-                <div style={{ padding: '1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
-                      <h3 style={{ fontSize: '1.35rem', color: prod.textColor, margin: 0 }}>{prod.name}</h3>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-display)',
-                          fontSize: '1.4rem',
-                          fontWeight: 700,
-                          color: 'var(--golden-yellow)',
-                          marginLeft: '0.5rem',
-                          flexShrink: 0,
-                        }}
-                      >
-                        {prod.mrp}
-                      </div>
-                    </div>
-
-                    <p style={{ fontSize: '0.95rem', color: prod.textColor, opacity: 0.9, marginBottom: '1rem', lineHeight: 1.4 }}>
-                      {prod.benefit}
-                    </p>
-
-                    <div style={{ paddingTop: '0.5rem', marginBottom: '1.5rem' }}>
-                      {prod.specs.map((sp, idx) => (
-                        <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', marginBottom: '0.3rem' }}>
-                          <Check size={14} color="var(--golden-yellow)" />
-                          <span>{sp}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn btn-primary"
-                    style={{ width: '100%' }}
-                    onClick={() => onSelectProduct(prod)}
-                  >
-                    <ShoppingBag size={18} /> Request Dealer Quote
-                  </motion.button>
-                </div>
-              </motion.div>
+                prod={prod}
+                isSingle={productsData[activeCategory].length === 1}
+                onSelectProduct={onSelectProduct}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
       </div>
 
       <style>{`
+        .product-card-body-split {
+          display: grid;
+          grid-template-columns: 1.05fr 1fr;
+          flex-grow: 1;
+        }
+
+        @media (max-width: 850px) {
+          .product-card-body-split {
+            grid-template-columns: 1fr !important;
+          }
+          .product-content-container {
+            padding: 1.5rem !important;
+          }
+        }
+
         @media (max-width: 600px) {
           .category-switcher-bar { width: 100%; gap: 0.5rem !important; }
           .category-tab-btn { width: 100%; justify-content: center; padding: 0.65rem 1rem !important; font-size: 0.95rem !important; }

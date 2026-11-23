@@ -119,8 +119,7 @@ export default function Footer() {
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.92rem' }}>
               <li><a href="#products" style={{ color: '#C0C0BA' }}>Mosquito Bats / Rackets</a></li>
-              <li><a href="#products" style={{ color: '#C0C0BA' }}>10+4 FREE 12-Hr Coils</a></li>
-              <li><a href="#products" style={{ color: '#C0C0BA' }}>Herbal Agarbatti Sticks</a></li>
+              <li><a href="#products" style={{ color: '#C0C0BA' }}>Full Night Coils</a></li>
               <li><a href="#products" style={{ color: '#C0C0BA' }}>Garuda Rekha 3-in-1 Chalk</a></li>
               <li><a href="#products" style={{ color: '#C0C0BA' }}>30-Coil Power Booster</a></li>
             </ul>
