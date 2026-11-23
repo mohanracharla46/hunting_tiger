@@ -422,12 +422,26 @@ export default function ProductShowcase({ onSelectProduct }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
+            className={`product-showcase-grid product-grid-${activeCategory} product-grid-count-${productsData[activeCategory].length}`}
             style={{
               display: 'grid',
-              gridTemplateColumns: productsData[activeCategory].length === 1 ? '1fr' : 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
+              gridTemplateColumns:
+                productsData[activeCategory].length === 1
+                  ? '1fr'
+                  : productsData[activeCategory].length === 4
+                  ? 'repeat(2, 1fr)'
+                  : 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
               gap: '2rem',
-              maxWidth: productsData[activeCategory].length === 1 ? '960px' : 'none',
-              margin: productsData[activeCategory].length === 1 ? '0 auto' : '0',
+              maxWidth:
+                productsData[activeCategory].length === 1
+                  ? '960px'
+                  : productsData[activeCategory].length === 4
+                  ? '1140px'
+                  : 'none',
+              margin:
+                productsData[activeCategory].length === 1 || productsData[activeCategory].length === 4
+                  ? '0 auto'
+                  : '0',
               width: '100%',
             }}
           >
@@ -451,6 +465,9 @@ export default function ProductShowcase({ onSelectProduct }) {
         }
 
         @media (max-width: 850px) {
+          .product-grid-count-4 {
+            grid-template-columns: 1fr !important;
+          }
           .product-card-body-split {
             grid-template-columns: 1fr !important;
           }
